@@ -4,13 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-<meta name="theme-color" content="#14111A">
+<meta name="theme-color" content="#F5F2F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14111A" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Zona Glam Supply — insumos y productos para uñas por marca. Pide por WhatsApp, retira en Tovar o recibe por MRW y ZOOM.">
+<meta name="format-detection" content="telephone=no">
 <title>Catálogo | Zona Glam Supply</title>
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zona Glam Supply">
+<meta property="og:title" content="Zona Glam Supply — Todo para uñas">
+<meta property="og:description" content="El catálogo completo, marca por marca. Acrílicos, geles y decoración al mayor y detal. Envíos a toda Venezuela.">
+<meta property="og:locale" content="es_VE">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@200;300;400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Store","name":"Zona Glam Supply",
+"description":"Insumos y productos para uñas al mayor y detal.",
+"address":{"@type":"PostalAddress","addressLocality":"Tovar","addressRegion":"Mérida","addressCountry":"VE"},
+"telephone":"+584148430701","currenciesAccepted":"USD,VES","priceRange":"$",
+"openingHoursSpecification":{"@type":"OpeningHoursSpecification",
+"dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+"opens":"09:00","closes":"18:00"}}
+</script>
 
 <style>
 /* ===================================================================
@@ -20,6 +40,7 @@
    =================================================================== */
 
 :root{
+  /* --- Pigmentos de la casa (sin cambios de identidad) --- */
   --papel:#F5F2F3;
   --nacar:#EAE4E7;
   --blanco:#FFFFFF;
@@ -27,26 +48,63 @@
   --vino:#8E2B4E;
   --champan:#C9A96A;
   --moka:#6B5245;
-  --gris:#7C7682;
+
+  /* --- Tinta secundaria ---
+     El gris anterior (#7C7682) daba 3.96:1 sobre papel y 3.51:1 sobre nácar:
+     por debajo del 4.5:1 que pide texto normal. Este mantiene el mismo tono
+     violáceo y pasa sobre los dos fondos. */
+  --gris:#6B6570;
+  /* El champán es un metal, no una tinta: 2.02:1 sobre papel. Se queda para
+     filetes y adornos; cuando tiene que leerse, entra su versión tostada. */
+  --champan-tinta:#886B31;
+  /* Sobre fondo oscuro el champán rinde 8.33:1, ahí sí puede ser texto. */
+  --nacar-suave:rgba(234,228,231,.72);
+  --nacar-tenue:rgba(234,228,231,.55);
 
   --linea:rgba(20,17,26,.10);
   --linea-media:rgba(20,17,26,.20);
+  --linea-fuerte:rgba(20,17,26,.34);
 
-  --ease:cubic-bezier(.22,.61,.36,1);
+  /* --- Compás de movimiento ---
+     Tres duraciones y tres curvas para toda la casa. Antes había una sola
+     curva y once duraciones sueltas entre .2s y 1.1s. */
+  --ease:cubic-bezier(.22,.61,.36,1);      /* salida estándar  */
+  --ease-suave:cubic-bezier(.33,1,.68,1);  /* reposo elegante  */
+  --ease-entra:cubic-bezier(.16,1,.3,1);   /* entradas largas  */
+  --t-corto:.22s;
+  --t-medio:.42s;
+  --t-largo:.78s;
+
+  /* --- Escala tipográfica fluida --- */
+  --t-cejilla:clamp(9.5px,.62vw,10.5px);
+  --t-menuda:clamp(11px,.8vw,12px);
+  --t-cuerpo:clamp(13.5px,.95vw,14.5px);
+  --t-titulo:clamp(1.35rem,3.4vw,2rem);
+  --t-seccion:clamp(1.9rem,5.4vw,3.2rem);
+  --t-portada:clamp(2.3rem,7vw,5.2rem);
+
   --gutter:clamp(1.15rem,4vw,3.2rem);
   --ancho:1320px;
   --riel:0px;
+  --alto-nav:64px;
 }
 @media (min-width:1280px){ :root{ --riel:48px } }
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{
+  -webkit-text-size-adjust:100%;
+  /* Un ancla nunca queda debajo de la barra fija. */
+  scroll-padding-top:calc(var(--alto-nav) + 2.5rem);
+}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
 body{
   margin:0;padding-left:var(--riel);
   background:var(--papel);color:var(--tinta);
   font-family:'Jost',system-ui,-apple-system,sans-serif;
   font-size:15px;font-weight:300;line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  /* Cifras de una sola anchura: los precios no bailan al cambiar de dígito. */
+  font-variant-numeric:tabular-nums;
 }
 img,video{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
@@ -54,22 +112,44 @@ input,select,textarea{font:inherit;color:inherit}
 a{color:inherit;text-decoration:none}
 ul{margin:0;padding:0;list-style:none}
 p,h1,h2,h3,h4{margin:0}
-:focus-visible{outline:1px solid var(--vino);outline-offset:4px}
+/* El filete de 1px no cumplía el perímetro de 2px con 3:1 que pide el foco.
+   El vino sobre papel rinde 7.24:1, así que solo hacía falta engrosarlo. */
+:focus-visible{outline:2px solid var(--vino);outline-offset:3px;border-radius:1px}
+/* Sobre el telón oscuro el vino se pierde: ahí manda el papel. */
+.hero :focus-visible,.cinta :focus-visible,.pie :focus-visible{outline-color:var(--papel)}
 ::selection{background:var(--tinta);color:var(--papel)}
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:var(--nacar)}
 ::-webkit-scrollbar-thumb{background:var(--tinta)}
 
-.display{font-family:'Bodoni Moda',Didot,Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:.005em}
+/* Bodoni Moda se carga con el eje óptico 6..96 y hasta ahora no se usaba:
+   el navegador dibujaba un titular de 5rem con el mismo grabado que una
+   nota al pie. Con opsz los remates se afinan al crecer, que es justo de
+   donde viene el aire de las cabeceras de revista. */
+.display{
+  font-family:'Bodoni Moda',Didot,Georgia,serif;font-weight:400;
+  line-height:1.1;letter-spacing:.005em;
+  font-optical-sizing:auto;
+  text-wrap:balance;
+}
+.display.grande{font-variation-settings:'opsz' 96}
+.display.media{font-variation-settings:'opsz' 40}
 .envoltura{max-width:var(--ancho);margin:0 auto;padding-inline:var(--gutter)}
 .sin-barra{scrollbar-width:none;-ms-overflow-style:none}
 .sin-barra::-webkit-scrollbar{display:none}
 .oculto{display:none !important}
+/* Para lo que debe oírse pero no verse. */
+.oculto-visual{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0;
+}
 
 /* Cejilla editorial */
-.cejilla{font-size:10px;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--gris)}
+.cejilla{font-size:var(--t-cejilla);font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--gris)}
 .cejilla-vino{color:var(--vino)}
-.cejilla-champan{color:var(--champan)}
+/* Sobre papel el champán no se lee (2.02:1); sobre tinta sí (8.33:1). */
+.cejilla-champan{color:var(--champan-tinta)}
+.pie .cejilla-champan,.hero .cejilla-champan{color:var(--champan)}
 
 /* Filete de champán */
 .filete{height:1px;background:linear-gradient(90deg,transparent,var(--champan) 18%,var(--moka) 50%,var(--champan) 82%,transparent)}
@@ -97,10 +177,20 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 }
 .riel-progreso{position:absolute;right:-1px;top:0;width:2px;background:var(--moka);height:0}
 
-/* ==================== Cinta superior ==================== */
-.cinta{background:var(--tinta);color:var(--nacar);overflow:hidden;padding-block:9px}
+/* ==================== Cinta superior ====================
+   Texto en movimiento perpetuo sin forma de detenerlo: eso es justo lo que
+   prohíbe el criterio de contenido auto-animado. Ahora se detiene al pasar
+   por encima, al recibir foco de teclado y con reduced-motion. */
+.cinta{background:var(--tinta);color:var(--nacar);overflow:hidden;padding-block:9px;position:relative}
+/* Los extremos se desvanecen en vez de cortarse en seco. */
+.cinta::before,.cinta::after{
+  content:"";position:absolute;top:0;bottom:0;width:clamp(28px,6vw,72px);z-index:2;pointer-events:none;
+}
+.cinta::before{left:0;background:linear-gradient(90deg,var(--tinta),transparent)}
+.cinta::after{right:0;background:linear-gradient(270deg,var(--tinta),transparent)}
 .marquesina{display:flex;gap:3.5rem;width:max-content;animation:desliza 44s linear infinite}
-.marquesina span{white-space:nowrap;font-size:10px;letter-spacing:.32em;text-transform:uppercase}
+.cinta:hover .marquesina,.cinta:focus-within .marquesina{animation-play-state:paused}
+.marquesina span{white-space:nowrap;font-size:var(--t-cejilla);letter-spacing:.32em;text-transform:uppercase;color:var(--nacar-suave)}
 @keyframes desliza{to{transform:translateX(-50%)}}
 
 /* ==================== Navegación ==================== */
@@ -159,27 +249,72 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 }
 
 /* ==================== Hero ==================== */
-.hero{position:relative;width:100%;height:clamp(460px,74vh,760px);background:var(--tinta);overflow:hidden}
+.hero{position:relative;width:100%;height:clamp(520px,86svh,860px);background:var(--tinta);overflow:hidden}
 .hero-pista{position:absolute;inset:0}
-.hero-lamina{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--ease);pointer-events:none}
+.hero-lamina{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--ease-suave);pointer-events:none}
 .hero-lamina.activa{opacity:1}
 /* La foto de respaldo va debajo del video: cubre la carga y el fallo. */
 .hero-lamina img,.hero-lamina video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-lamina .hero-poster{z-index:0}
 .hero-lamina video{z-index:1;background:transparent}
-.hero-lamina.activa img.kenburns{animation:kenburns 13s ease-out forwards}
-@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.13)}}
+/* Antes: 1.02 → 1.13 en 13s. Un 11% de recorrido se percibe como zoom.
+   La deriva de una portada se nota sin verse: 6% y el doble de tiempo. */
+.hero-lamina.activa img.kenburns{animation:kenburns 26s var(--ease-suave) forwards}
+@keyframes kenburns{from{transform:scale(1.015) translate3d(0,0,0)}to{transform:scale(1.075) translate3d(-1.2%,-.8%,0)}}
+
+/* El velo anterior subía al 55%, caía al 6% y volvía a subir: esa banda
+   clara a media altura era lo que deslucía el titular. Ahora es una sola
+   caída continua, más profunda abajo, donde va la ficha del producto. */
 .hero-velo{
   position:absolute;inset:0;z-index:5;pointer-events:none;
-  background:linear-gradient(180deg,rgba(20,17,26,.55) 0%,rgba(20,17,26,.06) 32%,rgba(20,17,26,.14) 56%,rgba(20,17,26,.8) 100%);
+  background:
+    linear-gradient(180deg,rgba(20,17,26,.62) 0%,rgba(20,17,26,.34) 26%,rgba(20,17,26,.22) 48%,rgba(20,17,26,.58) 74%,rgba(20,17,26,.88) 100%),
+    radial-gradient(120% 80% at 50% 0%,transparent 40%,rgba(20,17,26,.3) 100%);
 }
+/* Grano finísimo sobre la foto: quita el aspecto de banner y acerca la
+   imagen al papel impreso del resto de la página. */
+.hero-velo::after{
+  content:"";position:absolute;inset:0;opacity:.24;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
 .hero-texto{
-  position:absolute;z-index:7;inset-inline:0;top:clamp(2.6rem,7vw,4.4rem);
+  position:absolute;z-index:7;inset-inline:0;top:clamp(3rem,9vh,6rem);
   padding-inline:calc(var(--gutter) + 1rem);text-align:center;pointer-events:none;
 }
-.hero-texto .cejilla{color:var(--champan);display:block;margin-bottom:1.2rem}
-.hero-texto h2{color:var(--papel);font-size:clamp(2rem,6.2vw,4.3rem);letter-spacing:.02em;max-width:16ch;margin-inline:auto}
-.hero-texto .filete{max-width:120px;margin:1.6rem auto 0;opacity:.85}
+.hero-texto .cejilla{color:var(--champan);display:block;margin-bottom:1.4rem}
+.hero-texto h2{
+  color:var(--papel);font-size:var(--t-portada);letter-spacing:.015em;
+  max-width:15ch;margin-inline:auto;
+}
+.hero-texto .filete{max-width:120px;margin:1.9rem auto 0;opacity:.85}
+
+/* Entrada por cortinilla: cada línea sube desde detrás de su propio borde,
+   como un cartel que se descubre. Es el gesto que da el golpe de entrada
+   sin recurrir a nada que parezca una animación de plantilla. */
+.telon-linea{display:block;overflow:hidden}
+.telon-linea>*{display:block;transform:translateY(105%);opacity:0}
+.hero.entrada .telon-linea>*{
+  transform:none;opacity:1;
+  transition:transform 1.15s var(--ease-entra),opacity .9s var(--ease-entra);
+}
+.hero.entrada .l-1>*{transition-delay:.15s}
+.hero.entrada .l-2>*{transition-delay:.32s}
+.hero.entrada .l-3>*{transition-delay:.5s}
+
+/* Invitación a bajar: una línea que respira, no una flecha que rebota. */
+.hero-bajar{
+  position:absolute;z-index:7;left:50%;transform:translateX(-50%);
+  bottom:clamp(1.2rem,3vw,1.8rem);
+  display:none;flex-direction:column;align-items:center;gap:.75rem;
+  color:var(--nacar-tenue);font-size:9px;letter-spacing:.34em;text-transform:uppercase;
+  transition:color var(--t-medio) var(--ease);
+}
+@media (min-width:980px){.hero-bajar{display:flex}}
+.hero-bajar:hover{color:var(--papel)}
+.hero-bajar i{display:block;width:1px;height:46px;background:linear-gradient(180deg,transparent,var(--champan));overflow:hidden}
+.hero-bajar i::after{content:"";display:block;width:1px;height:46px;background:var(--papel);animation:cae 2.6s var(--ease-suave) infinite}
+@keyframes cae{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
 .hero-pie{
   position:absolute;z-index:7;left:0;right:0;bottom:clamp(3.4rem,7vw,4.4rem);
@@ -204,9 +339,45 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 .hero-flecha.der{right:clamp(26px,3.4vw,46px)}
 @media (min-width:860px){.hero-flecha{display:flex}}
 
-.hero-indicadores{position:absolute;z-index:8;bottom:clamp(1.5rem,3.4vw,2.2rem);left:50%;transform:translateX(-50%);display:flex;gap:8px}
-.hero-indicadores button{position:relative;width:44px;height:2px;background:rgba(245,242,243,.28);overflow:hidden}
-.hero-indicadores i{position:absolute;inset:0 auto 0 0;width:0;background:var(--papel);display:block}
+/* El indicador medía 44×2 px reales de zona pulsable: por debajo del mínimo
+   de 24×24. El filete sigue midiendo 2px; lo que crece es el área invisible
+   que lo rodea, así que se ve igual y ahora se puede tocar. */
+/* Los indicadores se van al margen derecho, bajo el contador de láminas:
+   un solo grupo de control en una esquina, en vez de dos sistemas que se
+   estorbaban en el centro con la invitación a bajar. */
+.hero-indicadores{
+  position:absolute;z-index:8;bottom:clamp(1.4rem,3.2vw,2rem);
+  right:calc(var(--gutter) + clamp(14px,2.2vw,28px));
+  display:flex;align-items:center;gap:2px;
+}
+@media (max-width:759px){
+  .hero-indicadores{right:auto;left:50%;transform:translateX(-50%)}
+}
+.hero-indicadores button{
+  position:relative;width:52px;height:28px;display:flex;align-items:center;
+  background:none;
+}
+.hero-indicadores button::before{
+  content:"";position:absolute;inset-inline:4px;height:2px;
+  background:rgba(245,242,243,.26);transition:background var(--t-medio) var(--ease);
+}
+.hero-indicadores button:hover::before{background:rgba(245,242,243,.5)}
+.hero-indicadores i{
+  position:absolute;left:4px;right:auto;width:0;height:2px;
+  background:var(--papel);display:block;
+}
+/* Pausa: exigido para cualquier contenido que avanza solo. */
+.hero-pausa{
+  position:relative;z-index:8;width:28px;height:28px;margin-left:.5rem;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(245,242,243,.6);transition:color var(--t-medio) var(--ease);
+}
+.hero-pausa:hover{color:var(--papel)}
+.hero-pausa svg{width:11px;height:11px;fill:currentColor;stroke:none}
+.hero-pausa .icono-play{display:none}
+.hero-pausa[aria-pressed="true"] .icono-play{display:block}
+.hero-pausa[aria-pressed="true"] .icono-pausa{display:none}
+
 @media (max-width:759px){.hero-pie{justify-content:center}.hero-producto{text-align:center}}
 
 /* ==================== Beneficios ==================== */
@@ -226,14 +397,25 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 .cabeza-centro .filete{width:150px;margin:1.5rem auto 0}
 .cabeza-centro p{font-size:13.5px;color:var(--gris);max-width:44ch;margin:1.5rem auto 0;line-height:1.75}
 
-/* ==================== Índice de marcas ==================== */
-.indice{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.9rem;margin-bottom:clamp(1rem,3vw,2rem);border-bottom:1px solid var(--linea)}
+/* ==================== Índice de marcas ====================
+   Antes era una fila de botones sin memoria: al bajar por el catálogo no
+   había forma de saber en qué marca estabas. Ahora la cinta se queda bajo la
+   barra, marca la marca en pantalla y se desplaza sola hasta ella. */
+.indice-cinta{
+  position:sticky;top:var(--alto-nav);z-index:30;
+  margin-bottom:clamp(1rem,3vw,2rem);
+  background:linear-gradient(180deg,var(--papel) 72%,rgba(245,242,243,0));
+  padding-top:.9rem;
+}
+.indice{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.9rem;border-bottom:1px solid var(--linea);scroll-behavior:smooth}
 .indice button{
-  flex-shrink:0;padding:.5rem 1rem;border:1px solid var(--linea);
-  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);
-  transition:color .3s var(--ease),border-color .3s var(--ease);
+  flex-shrink:0;padding:.62rem 1.05rem;border:1px solid var(--linea);
+  font-size:var(--t-cejilla);letter-spacing:.16em;text-transform:uppercase;color:var(--gris);
+  white-space:nowrap;position:relative;
+  transition:color var(--t-corto) var(--ease),border-color var(--t-corto) var(--ease),background var(--t-corto) var(--ease);
 }
 .indice button:hover{color:var(--tinta);border-color:var(--moka)}
+.indice button[aria-current="true"]{color:var(--papel);background:var(--tinta);border-color:var(--tinta)}
 
 /* ==================== Fila de marca ==================== */
 .marca-fila{
@@ -275,6 +457,24 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 .tira-mas b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:2.1rem;color:var(--moka)}
 .tira-mas em{font-style:normal;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase}
 .tira>*{flex:0 0 clamp(166px,44vw,232px);scroll-snap-align:start}
+
+/* Flechas de tira: solo con puntero fino, y solo si hay recorrido. Nacen
+   apagadas y suben al acercarse a la fila, para no ensuciar el reposo. */
+.tira-marco{position:relative}
+.tira-flecha{
+  position:absolute;top:calc(50% - 3.2rem);transform:translateY(-50%);z-index:6;
+  width:44px;height:44px;display:none;align-items:center;justify-content:center;
+  background:rgba(245,242,243,.92);color:var(--tinta);
+  border:1px solid var(--linea);
+  opacity:0;transition:opacity var(--t-medio) var(--ease),background var(--t-corto) var(--ease),color var(--t-corto) var(--ease);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+@media (hover:hover) and (min-width:900px){ .tira-flecha{display:flex} }
+.tira-marco:hover .tira-flecha,.tira-flecha:focus-visible{opacity:1}
+.tira-flecha:hover{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.tira-flecha[hidden]{display:none}
+.tira-flecha.izq{left:-10px}
+.tira-flecha.der{right:-10px}
 .tira-barra{height:1px;background:var(--linea);position:relative}
 .tira-barra i{position:absolute;inset:0 auto 0 0;display:block;height:1px;background:var(--moka);width:0;transition:width .2s linear}
 
@@ -282,11 +482,24 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 /* Sin tarjeta ni recuadro: la foto se apoya sobre el papel de la página.
    El marco 3/4 solo alinea las filas; no se ve. */
 .ficha{display:flex;flex-direction:column;position:relative}
-.ficha-media{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;transition:transform .55s var(--ease)}
-@media (hover:hover){.ficha:hover .ficha-media{transform:translateY(-5px)}}
+.ficha-media{
+  position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;
+  transition:transform var(--t-medio) var(--ease-suave);
+}
+/* Un halo apenas perceptible bajo la foto al acercarse: da cuerpo al
+   producto sin dibujar la tarjeta que el diseño evita a propósito. */
+.ficha-media::after{
+  content:"";position:absolute;inset:auto 8% -6px 8%;height:24px;z-index:-1;
+  background:radial-gradient(50% 100% at 50% 0,rgba(20,17,26,.16),transparent 70%);
+  opacity:0;transition:opacity var(--t-medio) var(--ease);
+}
+@media (hover:hover){
+  .ficha:hover .ficha-media{transform:translateY(-6px)}
+  .ficha:hover .ficha-media::after{opacity:1}
+}
 .ficha-media img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
-  transition:opacity .7s var(--ease),transform .9s var(--ease);
+  transition:opacity var(--t-largo) var(--ease),transform 1.1s var(--ease-suave);
 }
 .ficha-media .alterna{opacity:0}
 @media (hover:hover){
@@ -305,15 +518,24 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 
 /* La acción es una línea de texto bajo el precio: siempre visible,
    también en teléfono, y no tapa la foto. */
+/* Era una línea de 9.5px con 3px de holgura: unos 16px de alto pulsable,
+   por debajo del mínimo de 24. Se le da altura real sin engordar el texto,
+   y el subrayado se dibuja con un pseudo-elemento para poder barrerlo. */
 .sello{
-  margin-top:.85rem;padding-bottom:3px;
+  position:relative;margin-top:.7rem;min-height:26px;padding:.45rem .2rem .3rem;
+  display:inline-flex;align-items:center;
   font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gris);
-  box-shadow:inset 0 -1px 0 var(--linea-media);
-  transition:color .3s var(--ease),box-shadow .3s var(--ease);
+  transition:color var(--t-corto) var(--ease);
 }
-.sello:hover{color:var(--tinta);box-shadow:inset 0 -1px 0 var(--tinta)}
-.sello.reservar{color:var(--moka);box-shadow:inset 0 -1px 0 rgba(107,82,69,.45)}
-.sello.reservar:hover{color:var(--tinta);box-shadow:inset 0 -1px 0 var(--moka)}
+.sello::before,.sello::after{content:"";position:absolute;left:.2rem;right:.2rem;bottom:2px;height:1px}
+.sello::before{background:var(--linea-media)}
+/* El trazo entra desde la izquierda en vez de encenderse de golpe. */
+.sello::after{background:var(--tinta);transform:scaleX(0);transform-origin:left;transition:transform var(--t-medio) var(--ease)}
+.sello:hover{color:var(--tinta)}
+.sello:hover::after{transform:scaleX(1)}
+.sello.reservar{color:var(--moka)}
+.sello.reservar::after{background:var(--moka)}
+.sello.reservar:hover{color:var(--tinta)}
 
 .ficha-texto{padding:1.05rem .2rem 0;text-align:center;display:flex;flex-direction:column;align-items:center}
 .ficha-texto .cejilla{display:block;margin-bottom:.6rem}
@@ -493,9 +715,16 @@ select.control{background:transparent;outline:none;cursor:pointer}
 /* Centinela de carga por lotes */
 .centinela{height:1px}
 
-/* ==================== Revelado ==================== */
-[data-revelar]{opacity:0;transform:translateY(18px)}
-[data-revelar].visible{opacity:1;transform:none;transition:opacity .85s var(--ease),transform .85s var(--ease)}
+/* ==================== Revelado ====================
+   18px de recorrido con todo entrando a la vez se lee como un salto. Bajarlo
+   a 12px y escalonar por columnas convierte la aparición en una onda: es el
+   mismo efecto que un stagger de 60ms, resuelto sin librería. */
+[data-revelar]{opacity:0;transform:translateY(12px)}
+[data-revelar].visible{
+  opacity:1;transform:none;
+  transition:opacity var(--t-largo) var(--ease-entra),transform var(--t-largo) var(--ease-entra);
+  transition-delay:calc(var(--paso,0) * 65ms);
+}
 
 /* ==================== Cesta ==================== */
 .telon{
@@ -596,20 +825,41 @@ select.control{background:transparent;outline:none;cursor:pointer}
 @media (min-width:820px){.pie-rejilla{grid-template-columns:1.4fr 1fr 1fr;gap:3.5rem}}
 .pie h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--papel)}
 .pie .cejilla-champan{display:block;margin-top:.7rem}
-.pie p{font-size:13px;color:rgba(234,228,231,.62);line-height:1.8;margin-top:1.4rem;max-width:36ch}
-.pie h4{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(234,228,231,.45);margin-bottom:1.3rem;font-weight:400}
-.pie li{font-size:13px;color:rgba(234,228,231,.62);line-height:2}
-.pie li a{transition:color .3s var(--ease)}
+.pie p{font-size:13px;color:var(--nacar-suave);line-height:1.8;margin-top:1.4rem;max-width:36ch}
+/* Al 45% este rótulo daba 3.84:1 y el pie de página 3.28:1. Por debajo del
+   4.5:1 de texto normal: el mínimo sobre tinta es 51%. */
+.pie h4{font-size:var(--t-cejilla);letter-spacing:.3em;text-transform:uppercase;color:var(--nacar-tenue);margin-bottom:1.3rem;font-weight:400}
+.pie li{font-size:13px;color:var(--nacar-suave);line-height:2}
+.pie li a{transition:color var(--t-corto) var(--ease)}
 .pie li a:hover{color:var(--champan)}
 .pie-base{
   border-top:1px solid rgba(245,242,243,.1);display:flex;flex-wrap:wrap;
   justify-content:space-between;gap:.7rem;padding-block:1.4rem;
-  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(234,228,231,.4);
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--nacar-tenue);
 }
 
+/* ==================== Transiciones de vista ====================
+   El paso inicio → marca → producto era un corte seco: una vista se ocultaba
+   y otra aparecía. Con View Transitions el navegador funde ambos fotogramas.
+   Donde no existe la API no pasa nada: el corte de siempre. */
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){animation:vt-sale .3s var(--ease) both}
+  ::view-transition-new(root){animation:vt-entra .42s var(--ease-entra) both}
+}
+@keyframes vt-sale{to{opacity:0;transform:translateY(-6px)}}
+@keyframes vt-entra{from{opacity:0;transform:translateY(10px)}}
+
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
-  [data-revelar]{opacity:1;transform:none}
+  /* Barrer todo con .001ms también rompe lo que no es decorativo: la cinta
+     daba un tirón y el plegable del detalle perdía su altura. Se apagan los
+     bucles, se acortan las transiciones y se deja el estado final visible. */
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .marquesina,.hero-bajar i::after,.esqueleto::after{animation:none !important}
+  .hero-lamina.activa img.kenburns{animation:none !important;transform:none !important}
+  [data-revelar],.telon-linea>*{opacity:1 !important;transform:none !important}
   .tira{scroll-behavior:auto}
 }
 </style>
@@ -643,7 +893,8 @@ select.control{background:transparent;outline:none;cursor:pointer}
       <button class="btn-cesta" data-accion="abrir-cesta" aria-label="Abrir la cesta">
         <span class="cejilla">Cesta</span>
         <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 10V7a4 4 0 00-8 0v3M5 9h14l1 12H4L5 9z"/></svg>
-        <span class="contador" id="contador">0</span>
+        <span class="contador" id="contador" aria-hidden="true">0</span>
+        <span class="oculto-visual" id="contador-lector" role="status" aria-live="polite">Cesta vacía</span>
       </button>
     </div>
   </div>
@@ -677,9 +928,9 @@ select.control{background:transparent;outline:none;cursor:pointer}
       <div class="hero-velo"></div>
 
       <div class="hero-texto">
-        <span class="cejilla">Acrílicos · Geles · Decoración · Mayor y detal</span>
-        <h2 class="display">El catálogo completo, marca por marca</h2>
-        <div class="filete"></div>
+        <span class="telon-linea l-1"><span class="cejilla">Acrílicos · Geles · Decoración · Mayor y detal</span></span>
+        <h2 class="display grande"><span class="telon-linea l-2"><span>El catálogo completo,</span></span><span class="telon-linea l-3"><span>marca por marca</span></span></h2>
+        <span class="telon-linea l-3"><span class="filete" style="display:block"></span></span>
       </div>
 
       <button class="hero-flecha izq" data-accion="hero" data-dir="-1" aria-label="Anterior">
@@ -693,6 +944,11 @@ select.control{background:transparent;outline:none;cursor:pointer}
         <div class="hero-producto" id="hero-producto"></div>
         <div class="hero-contador" id="hero-contador"></div>
       </div>
+
+      <a class="hero-bajar" href="#surtido" aria-label="Ir al surtido">
+        <span>Ver el surtido</span>
+        <i></i>
+      </a>
 
       <div class="hero-indicadores" id="hero-indicadores"></div>
     </div>
@@ -714,14 +970,16 @@ select.control{background:transparent;outline:none;cursor:pointer}
       </div>
     </div>
 
-    <div class="envoltura seccion">
+    <div class="envoltura seccion" id="surtido">
       <header class="cabeza-centro" data-revelar>
         <span class="cejilla cejilla-vino">El surtido</span>
-        <h2 class="display">Nuestras marcas</h2>
+        <h2 class="display media">Nuestras marcas</h2>
         <div class="filete"></div>
         <p>Cada marca con su selección disponible. Toca una marca para ver todo su catálogo.</p>
       </header>
-      <div class="indice sin-barra" id="indice-marcas"></div>
+      <div class="indice-cinta">
+        <div class="indice sin-barra" id="indice-marcas" role="tablist" aria-label="Ir a una marca"></div>
+      </div>
       <div id="lista-marcas"></div>
     </div>
   </section>
@@ -868,7 +1126,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
 
 <!-- ================= Cesta ================= -->
 <div class="telon" id="telon-cesta" data-telon>
-  <aside class="cajon" role="dialog" aria-label="Tu cesta">
+  <aside class="cajon" role="dialog" aria-modal="true" aria-label="Tu cesta">
     <div class="cajon-cabeza">
       <div>
         <span class="cejilla">Tu pedido</span>
@@ -922,7 +1180,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
 
 <!-- ================= Reserva ================= -->
 <div class="modal" id="modal-reserva" data-telon>
-  <div class="modal-caja" role="dialog" aria-label="Confirmar reserva">
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-label="Confirmar reserva">
     <span class="cejilla">Sin stock ahora</span>
     <h3 class="display" id="reserva-nombre"></h3>
     <p>Este producto está agotado. Puedes dejarlo en tu cesta como reserva: lo incluimos en tu pedido marcado como “por encargo” y te avisamos apenas llegue. No se cobra hasta confirmar disponibilidad.</p>
@@ -961,7 +1219,8 @@ let vista = 'inicio', marcaActual = '', textoBusqueda = '';
 let soloStock = false, orden = 'destacado';
 let detalle = null, cantidadDetalle = 1, medios = [];
 let reservaPendiente = null;
-let laminas = [], laminaActual = 0, timerHero = null;
+let laminas = [], laminaActual = 0, timerHero = null, heroDetenido = false;
+const MENOS_MOVIMIENTO = window.matchMedia('(prefers-reduced-motion: reduce)');
 let timerAviso = null, timerBusqueda = null;
 let restaurando = false, scrollGuardado = 0;
 const tiras = [];
@@ -1007,17 +1266,44 @@ function aviso(texto, tono){
   timerAviso = setTimeout(() => el.classList.remove('visible'), 3000);
 }
 
+/* Los elementos que cruzan el borde en el mismo cuadro forman una tanda y
+   entran escalonados. Sin esto, una rejilla de 24 fichas aparecía de golpe. */
+let tandaSello = 0, tandaPaso = 0;
 const observadorRevelar = new IntersectionObserver(entradas => {
+  const ahora = performance.now();
+  if (ahora - tandaSello > 120){ tandaSello = ahora; tandaPaso = 0; }
   entradas.forEach(e => {
     if (!e.isIntersecting) return;
+    e.target.style.setProperty('--paso', Math.min(tandaPaso++, 7));
     e.target.classList.add('visible');
     observadorRevelar.unobserve(e.target);
   });
-}, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+}, { threshold:.1, rootMargin:'0px 0px -32px 0px' });
 
 function revelar(raiz){
   $$('[data-revelar]:not(.visible)', raiz || document).forEach(el => observadorRevelar.observe(el));
 }
+
+/* La cinta de marcas sigue a la página: subraya la marca en pantalla y se
+   desliza hasta ella para que nunca quede fuera de cuadro. */
+let indiceActivo = '';
+const observadorIndice = new IntersectionObserver(entradas => {
+  const dentro = entradas.filter(e => e.isIntersecting)
+    .sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+  if (!dentro) return;
+  const nombre = dentro.target.dataset.marca || '';
+  if (nombre === indiceActivo) return;
+  indiceActivo = nombre;
+  $$('#indice-marcas button').forEach(b => {
+    const activo = b.dataset.marca === nombre;
+    activo ? b.setAttribute('aria-current','true') : b.removeAttribute('aria-current');
+    if (activo){
+      const cinta = b.parentElement;
+      const destino = b.offsetLeft - (cinta.clientWidth - b.offsetWidth) / 2;
+      cinta.scrollTo({ left:Math.max(0, destino), behavior:'smooth' });
+    }
+  });
+}, { rootMargin:'-45% 0px -45% 0px' });
 
 /* Las tiras se arman al acercarse y solo se desplazan solas si se ven.
    Así el inicio no tiene que dibujar el catálogo entero de golpe. */
@@ -1165,11 +1451,18 @@ function montarHero(config){
 
   $('#hero-indicadores').innerHTML = laminas.map((_,i) =>
     '<button data-accion="hero-ir" data-i="' + i + '" aria-label="Ir al destacado ' + (i+1) + '"><i data-relleno="' + i + '"></i></button>'
-  ).join('');
+  ).join('') +
+  '<button class="hero-pausa" data-accion="hero-pausa" aria-pressed="false" aria-label="Pausar el pase de imágenes">' +
+    '<svg class="icono-pausa" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9"/><rect x="7" y="1.5" width="3" height="9"/></svg>' +
+    '<svg class="icono-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5l7 4.5-7 4.5z"/></svg>' +
+  '</button>';
 
   $('#hero').classList.remove('oculto');
   pintarLamina(0);
   autoplay();
+  // La cortinilla arranca en el cuadro siguiente para que la transición
+  // tenga un estado inicial que animar.
+  requestAnimationFrame(() => requestAnimationFrame(() => $('#hero').classList.add('entrada')));
 }
 
 function pintarLamina(i){
@@ -1203,21 +1496,61 @@ function pintarLamina(i){
     el.style.width = n < laminaActual ? '100%' : '0%';
   });
   const relleno = $('[data-relleno="' + laminaActual + '"]');
-  if (relleno){
+  if (relleno && !heroDetenido && !MENOS_MOVIMIENTO.matches){
     void relleno.offsetWidth;
     relleno.style.transition = 'width ' + DURACION + 'ms linear';
+    relleno.style.width = '100%';
+  } else if (relleno && MENOS_MOVIMIENTO.matches){
+    // Sin cuenta atrás animada, el indicador señala la lámina actual y ya.
     relleno.style.width = '100%';
   }
 }
 
 function autoplay(){
   clearInterval(timerHero);
-  if (laminas.length < 2) return;
+  if (laminas.length < 2 || heroDetenido || MENOS_MOVIMIENTO.matches) return;
   timerHero = setInterval(() => {
-    if (document.hidden || vista !== 'inicio') return;
+    if (document.hidden || vista !== 'inicio' || heroDetenido) return;
     pintarLamina(laminaActual + 1);
   }, DURACION);
 }
+
+/* Contenido que avanza solo necesita una forma de pararlo. Aquí son tres:
+   el botón, el puntero encima y el foco de teclado dentro del hero. */
+function detenerHero(manual){
+  if (manual) heroDetenido = true;
+  clearInterval(timerHero);
+  const relleno = $('[data-relleno="' + laminaActual + '"]');
+  if (relleno){ // congela la barra donde va, no la reinicia
+    const ancho = getComputedStyle(relleno).width;
+    relleno.style.transition = 'none';
+    relleno.style.width = ancho;
+  }
+  if (manual){
+    const b = $('.hero-pausa');
+    if (b){ b.setAttribute('aria-pressed','true'); b.setAttribute('aria-label','Reanudar el pase de imágenes'); }
+  }
+}
+
+function reanudarHero(manual){
+  if (manual){
+    heroDetenido = false;
+    const b = $('.hero-pausa');
+    if (b){ b.setAttribute('aria-pressed','false'); b.setAttribute('aria-label','Pausar el pase de imágenes'); }
+  }
+  if (heroDetenido) return;
+  pintarLamina(laminaActual);
+  autoplay();
+}
+
+(function controlHero(){
+  const hero = $('#hero');
+  if (!hero) return;
+  hero.addEventListener('pointerenter', () => { if (!heroDetenido) detenerHero(false); });
+  hero.addEventListener('pointerleave', () => reanudarHero(false));
+  hero.addEventListener('focusin',  () => { if (!heroDetenido) detenerHero(false); });
+  hero.addEventListener('focusout', e => { if (!hero.contains(e.relatedTarget)) reanudarHero(false); });
+})();
 
 function pausarHero(){
   clearInterval(timerHero);
@@ -1272,6 +1605,9 @@ function montarMarcas(){
     if (fila) observadorFilas.unobserve(fila);
   });
   tiras.length = 0;
+  // El HTML se vuelve a escribir entero: hay que soltar las filas anteriores.
+  observadorIndice.disconnect();
+  indiceActivo = '';
 
   $('#indice-marcas').innerHTML = marcas.map(m =>
     '<button data-accion="ir-marca" data-marca="' + esc(m.nombre) + '">' + esc(m.nombre) + '</button>'
@@ -1292,7 +1628,7 @@ function montarMarcas(){
       ? '<img src="' + esc(m.logo) + '" alt="" loading="lazy" decoding="async">'
       : '<span>' + esc(m.nombre.slice(0,3)) + '</span>';
 
-    return '<section class="marca-fila" id="marca-' + esc(slug(m.nombre)) + '" data-revelar>' +
+    return '<section class="marca-fila" id="marca-' + esc(slug(m.nombre)) + '" data-marca="' + esc(m.nombre) + '" data-revelar>' +
       '<button class="marca-cabeza" data-accion="marca" data-marca="' + esc(m.nombre) + '">' +
         '<span class="marca-sello">' + sello + '</span>' +
         '<span class="marca-datos">' +
@@ -1305,10 +1641,18 @@ function montarMarcas(){
           '</span>' +
         '</span>' +
       '</button>' +
-      '<div class="tira sin-barra" data-tira="' + i + '"></div>' +
+      '<div class="tira-marco">' +
+        '<div class="tira sin-barra" data-tira="' + i + '"></div>' +
+        '<button class="tira-flecha izq" data-tira="' + i + '" data-dir="-1" aria-label="Anteriores de ' + esc(m.nombre) + '" hidden>' +
+          '<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7"/></svg></button>' +
+        '<button class="tira-flecha der" data-tira="' + i + '" data-dir="1" aria-label="Siguientes de ' + esc(m.nombre) + '" hidden>' +
+          '<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>' +
+      '</div>' +
       '<div class="tira-barra"><i data-tira-barra="' + i + '"></i></div>' +
     '</section>';
   }).join('');
+
+  $$('#lista-marcas .marca-fila').forEach(f => observadorIndice.observe(f));
 
   marcas.forEach((_,i) => {
     const el = $('[data-tira="' + i + '"]');
@@ -1329,8 +1673,12 @@ function montarMarcas(){
     }, { passive:true });
 
     let avance = 0;
-    const timer = setInterval(() => {
-      if (!el.visible || document.hidden || vista !== 'inicio' || el.matches(':hover')) return;
+    // La tira también avanza sola: se detiene con el puntero encima (ya lo
+    // hacía), y ahora además con el foco dentro y con reduced-motion, igual
+    // que el hero y la cinta.
+    const timer = MENOS_MOVIMIENTO.matches ? null : setInterval(() => {
+      if (!el.visible || document.hidden || vista !== 'inicio') return;
+      if (el.matches(':hover') || el.contains(document.activeElement)) return;
       const max = el.scrollWidth - el.clientWidth;
       if (max <= 0) return;
       avance += el.clientWidth * .8;
@@ -1339,7 +1687,27 @@ function montarMarcas(){
     }, 5200);
 
     el.addEventListener('pointerdown', () => { avance = el.scrollLeft; }, { passive:true });
+    // Al empujar la tira a mano, el avance automático retoma desde ahí.
+    el.addEventListener('scroll', () => { avance = el.scrollLeft; }, { passive:true });
     tiras.push({ el, timer });
+  });
+
+  // Flechas de tira: en escritorio no había forma de recorrer una marca sin
+  // arrastrar. Solo aparecen cuando hay algo que recorrer.
+  $$('#lista-marcas .tira-flecha').forEach(f => {
+    const tira = $('[data-tira="' + f.dataset.tira + '"]');
+    if (!tira) return;
+    const refrescar = () => {
+      const max = tira.scrollWidth - tira.clientWidth;
+      f.hidden = max <= 4 ||
+        (f.dataset.dir === '-1' ? tira.scrollLeft <= 4 : tira.scrollLeft >= max - 4);
+    };
+    tira.addEventListener('scroll', refrescar, { passive:true });
+    new ResizeObserver(refrescar).observe(tira);
+    f.addEventListener('click', () => {
+      tira.scrollBy({ left: tira.clientWidth * .82 * Number(f.dataset.dir), behavior:'smooth' });
+    });
+    refrescar();
   });
 
   revelar($('#lista-marcas'));
@@ -1542,7 +1910,7 @@ function verMedio(i){
 /* ===================================================================
    Vistas e historial
    =================================================================== */
-function cambiarVista(v){
+function aplicarVista(v){
   vista = v;
   $('#vista-inicio').classList.toggle('oculto', v !== 'inicio');
   $('#vista-lista').classList.toggle('oculto', v !== 'lista');
@@ -1552,6 +1920,14 @@ function cambiarVista(v){
   else pausarHero();
 
   if (v !== 'detalle'){ const vd = $('#lienzo-video'); if (vd) vd.pause(); }
+}
+
+/* El salto entre vistas era un corte: una sección se ocultaba y otra
+   aparecía en el mismo cuadro. Si el navegador sabe fundir dos estados del
+   documento, que lo haga; si no, se llama igual y no cambia nada. */
+function cambiarVista(v){
+  if (!document.startViewTransition || MENOS_MOVIMIENTO.matches){ aplicarVista(v); return; }
+  document.startViewTransition(() => aplicarVista(v));
 }
 
 function empujar(estado){
@@ -1627,7 +2003,7 @@ function agregar(id, cantidad, confirmado){
   if (agotado(p) && !confirmado){
     reservaPendiente = { id:String(id), cantidad:Math.max(1, parseInt(cantidad,10)||1) };
     $('#reserva-nombre').textContent = p.nombre;
-    $('#modal-reserva').classList.add('abierto');
+    abrirCapa($('#modal-reserva'));
     return;
   }
 
@@ -1667,6 +2043,9 @@ function pintarCesta(){
   const unidades = ls.reduce((a,l) => a + l.qty, 0);
   $('#contador').textContent = unidades;
   $('#contador-texto').textContent = unidades;
+  $('#contador-lector').textContent = unidades
+    ? 'Cesta: ' + plural(unidades,'artículo','artículos')
+    : 'Cesta vacía';
 
   const cuerpo = $('#cesta-cuerpo');
 
@@ -1728,8 +2107,49 @@ function pintarCesta(){
   }
 }
 
-function abrirCesta(){ $('#telon-cesta').classList.add('abierto'); document.body.style.overflow = 'hidden'; }
-function cerrarCesta(){ $('#telon-cesta').classList.remove('abierto'); document.body.style.overflow = ''; }
+/* ===================================================================
+   Foco en capas
+   El cajón y el modal se dibujaban encima de la página, pero el tabulador
+   seguía recorriendo el catálogo que hay detrás: quien navega con teclado
+   o lector de pantalla se perdía fuera del diálogo sin saberlo.
+   =================================================================== */
+const FOCABLES = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+let devolverFoco = null;
+
+function atrapar(e){
+  if (e.key !== 'Tab') return;
+  const capa = $('.telon.abierto') || $('.modal.abierto');
+  if (!capa) return;
+  const items = $$(FOCABLES, capa).filter(el => el.offsetParent !== null);
+  if (!items.length) return;
+  const primero = items[0], ultimo = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === primero){ e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo){ e.preventDefault(); primero.focus(); }
+}
+document.addEventListener('keydown', atrapar);
+
+function abrirCapa(capa){
+  devolverFoco = document.activeElement;
+  capa.classList.add('abierto');
+  document.body.style.overflow = 'hidden';
+  $('main').setAttribute('aria-hidden','true');
+  const foco = $(FOCABLES, capa);
+  if (foco) requestAnimationFrame(() => foco.focus());
+}
+
+function cerrarCapa(capa){
+  capa.classList.remove('abierto');
+  if (!$('.telon.abierto') && !$('.modal.abierto')){
+    document.body.style.overflow = '';
+    $('main').removeAttribute('aria-hidden');
+    // Devolver el foco a donde estaba evita que el teclado vuelva al inicio.
+    if (devolverFoco && devolverFoco.isConnected) devolverFoco.focus();
+    devolverFoco = null;
+  }
+}
+
+function abrirCesta(){ abrirCapa($('#telon-cesta')); }
+function cerrarCesta(){ cerrarCapa($('#telon-cesta')); }
 function volverResumen(){ $('#cesta-resumen').classList.remove('oculto'); $('#cesta-datos').classList.add('oculto'); }
 
 function irDatos(){
@@ -1790,9 +2210,8 @@ function consultar(){
 document.addEventListener('click', e => {
   const telon = e.target.closest('[data-telon]');
   if (telon && e.target === telon){
-    telon.classList.remove('abierto');
-    if (telon.id === 'telon-cesta') document.body.style.overflow = '';
     if (telon.id === 'modal-reserva') reservaPendiente = null;
+    cerrarCapa(telon);
     return;
   }
 
@@ -1853,6 +2272,7 @@ document.addEventListener('click', e => {
 
     case 'hero':    clearInterval(timerHero); pintarLamina(laminaActual + Number(el.dataset.dir)); autoplay(); break;
     case 'hero-ir': clearInterval(timerHero); pintarLamina(Number(el.dataset.i)); autoplay(); break;
+    case 'hero-pausa': heroDetenido ? reanudarHero(true) : detenerHero(true); break;
 
     case 'abrir-cesta':  abrirCesta(); break;
     case 'cerrar-cesta': cerrarCesta(); break;
@@ -1865,12 +2285,12 @@ document.addEventListener('click', e => {
 
     case 'cancelar-reserva':
       reservaPendiente = null;
-      $('#modal-reserva').classList.remove('abierto');
+      cerrarCapa($('#modal-reserva'));
       break;
     case 'confirmar-reserva': {
       const r = reservaPendiente;
       reservaPendiente = null;
-      $('#modal-reserva').classList.remove('abierto');
+      cerrarCapa($('#modal-reserva'));
       if (r) agregar(r.id, r.cantidad, true);
       break;
     }
@@ -1898,9 +2318,9 @@ $('#control-orden').addEventListener('change', e => { orden = e.target.value; pi
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
-    $('#modal-reserva').classList.remove('abierto');
-    reservaPendiente = null;
-    cerrarCesta();
+    const modal = $('#modal-reserva');
+    if (modal.classList.contains('abierto')){ reservaPendiente = null; cerrarCapa(modal); return; }
+    if ($('#telon-cesta').classList.contains('abierto')){ cerrarCesta(); return; }
     return;
   }
   if (vista !== 'inicio' || laminas.length < 2) return;
