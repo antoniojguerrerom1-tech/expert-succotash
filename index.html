@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta name="theme-color" content="#14111A">
+<meta name="description" content="Zona Glam Supply — insumos y productos para uñas por marca. Pide por WhatsApp, retira en Tovar o recibe por MRW y ZOOM.">
+<title>Catálogo | Zona Glam Supply</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===================================================================
+   ZONA GLAM SUPPLY — Catálogo
+   Bodoni Moda para el registro editorial, Jost para la interfaz.
+   La paleta de la casa se mantiene; lo que cambia es la ejecución.
+   =================================================================== */
+
+:root{
+  --papel:#F5F2F3;
+  --nacar:#EAE4E7;
+  --blanco:#FFFFFF;
+  --tinta:#14111A;
+  --vino:#8E2B4E;
+  --champan:#C9A96A;
+  --moka:#6B5245;
+  --gris:#7C7682;
+
+  --linea:rgba(20,17,26,.10);
+  --linea-media:rgba(20,17,26,.20);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --gutter:clamp(1.15rem,4vw,3.2rem);
+  --ancho:1320px;
+  --riel:0px;
+}
+@media (min-width:1280px){ :root{ --riel:48px } }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;padding-left:var(--riel);
+  background:var(--papel);color:var(--tinta);
+  font-family:'Jost',system-ui,-apple-system,sans-serif;
+  font-size:15px;font-weight:300;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,video{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+p,h1,h2,h3,h4{margin:0}
+:focus-visible{outline:1px solid var(--vino);outline-offset:4px}
+::selection{background:var(--tinta);color:var(--papel)}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:var(--nacar)}
+::-webkit-scrollbar-thumb{background:var(--tinta)}
+
+.display{font-family:'Bodoni Moda',Didot,Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:.005em}
+.envoltura{max-width:var(--ancho);margin:0 auto;padding-inline:var(--gutter)}
+.sin-barra{scrollbar-width:none;-ms-overflow-style:none}
+.sin-barra::-webkit-scrollbar{display:none}
+.oculto{display:none !important}
+
+/* Cejilla editorial */
+.cejilla{font-size:10px;font-weight:400;letter-spacing:.34em;text-transform:uppercase;color:var(--gris)}
+.cejilla-vino{color:var(--vino)}
+.cejilla-champan{color:var(--champan)}
+
+/* Filete de champán */
+.filete{height:1px;background:linear-gradient(90deg,transparent,var(--champan) 18%,var(--moka) 50%,var(--champan) 82%,transparent)}
+.filete-corto{width:44px}
+
+/* Textura de papel */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:.30;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+}
+main,nav,footer,.riel,.cinta{position:relative;z-index:2}
+
+/* ==================== Riel lateral ==================== */
+.riel{
+  position:fixed;left:0;top:0;bottom:0;width:48px;z-index:40;
+  display:none;align-items:center;justify-content:center;
+  border-right:1px solid rgba(107,82,69,.18);
+  background:linear-gradient(180deg,var(--papel),var(--nacar));
+}
+@media (min-width:1280px){.riel{display:flex}}
+.riel span{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:9.5px;letter-spacing:.46em;text-transform:uppercase;color:var(--moka);
+}
+.riel-progreso{position:absolute;right:-1px;top:0;width:2px;background:var(--moka);height:0}
+
+/* ==================== Cinta superior ==================== */
+.cinta{background:var(--tinta);color:var(--nacar);overflow:hidden;padding-block:9px}
+.marquesina{display:flex;gap:3.5rem;width:max-content;animation:desliza 44s linear infinite}
+.marquesina span{white-space:nowrap;font-size:10px;letter-spacing:.32em;text-transform:uppercase}
+@keyframes desliza{to{transform:translateX(-50%)}}
+
+/* ==================== Navegación ==================== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,242,243,.80);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid var(--linea);
+  transition:box-shadow .4s var(--ease);
+}
+.nav.compacta{box-shadow:0 1px 0 rgba(20,17,26,.06),0 22px 44px -40px rgba(20,17,26,.55)}
+.nav-fila{
+  max-width:var(--ancho);margin:0 auto;padding:1.05rem var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  transition:padding .4s var(--ease);
+}
+.nav.compacta .nav-fila{padding-block:.7rem}
+.logo{display:flex;flex-direction:column;align-items:flex-start;gap:4px;flex-shrink:0}
+.logo b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(17px,3.4vw,23px);letter-spacing:.2em;text-transform:uppercase;line-height:1}
+.logo i{font-style:normal;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--moka)}
+
+.buscador{position:relative;flex:1;max-width:340px;display:none}
+@media (min-width:880px){.buscador{display:block}}
+.buscador input{
+  width:100%;background:rgba(255,255,255,.6);border:1px solid var(--linea);
+  padding:.65rem 2.4rem .65rem .9rem;font-size:12.5px;letter-spacing:.04em;outline:none;
+  transition:border-color .3s var(--ease),background .3s var(--ease);
+}
+.buscador input:focus{border-color:var(--tinta);background:var(--blanco)}
+.buscador input::placeholder{color:var(--gris)}
+.buscador svg{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--gris);pointer-events:none}
+
+.nav-acciones{display:flex;align-items:center;gap:1.4rem;flex-shrink:0}
+.icono{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.btn-lupa{display:block}
+@media (min-width:880px){.btn-lupa{display:none}}
+.btn-cesta{display:flex;align-items:center;gap:.65rem;transition:color .3s var(--ease)}
+.btn-cesta:hover{color:var(--vino)}
+.btn-cesta .cejilla{display:none}
+.btn-cesta .icono{display:block}
+@media (min-width:560px){.btn-cesta .cejilla{display:inline}.btn-cesta .icono{display:none}}
+.contador{
+  min-width:22px;height:22px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--tinta);color:var(--papel);font-size:10px;letter-spacing:.06em;
+  transition:transform .35s var(--ease),background .3s var(--ease);
+}
+.btn-cesta:hover .contador{background:var(--vino)}
+.contador.late{transform:scale(1.32)}
+
+.buscador-movil{background:var(--nacar);border-bottom:1px solid var(--linea);display:none}
+.buscador-movil.abierto{display:block}
+.buscador-movil input{
+  width:100%;background:var(--blanco);border:1px solid var(--linea);
+  padding:.75rem .9rem;font-size:16px;outline:none;margin-block:.85rem;
+}
+
+/* ==================== Hero ==================== */
+.hero{position:relative;width:100%;height:clamp(460px,74vh,760px);background:var(--tinta);overflow:hidden}
+.hero-pista{position:absolute;inset:0}
+.hero-lamina{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--ease);pointer-events:none}
+.hero-lamina.activa{opacity:1}
+/* La foto de respaldo va debajo del video: cubre la carga y el fallo. */
+.hero-lamina img,.hero-lamina video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-lamina .hero-poster{z-index:0}
+.hero-lamina video{z-index:1;background:transparent}
+.hero-lamina.activa img.kenburns{animation:kenburns 13s ease-out forwards}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.13)}}
+.hero-velo{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:linear-gradient(180deg,rgba(20,17,26,.55) 0%,rgba(20,17,26,.06) 32%,rgba(20,17,26,.14) 56%,rgba(20,17,26,.8) 100%);
+}
+.hero-texto{
+  position:absolute;z-index:7;inset-inline:0;top:clamp(2.6rem,7vw,4.4rem);
+  padding-inline:calc(var(--gutter) + 1rem);text-align:center;pointer-events:none;
+}
+.hero-texto .cejilla{color:var(--champan);display:block;margin-bottom:1.2rem}
+.hero-texto h2{color:var(--papel);font-size:clamp(2rem,6.2vw,4.3rem);letter-spacing:.02em;max-width:16ch;margin-inline:auto}
+.hero-texto .filete{max-width:120px;margin:1.6rem auto 0;opacity:.85}
+
+.hero-pie{
+  position:absolute;z-index:7;left:0;right:0;bottom:clamp(3.4rem,7vw,4.4rem);
+  padding-inline:calc(var(--gutter) + clamp(14px,2.2vw,28px));
+  display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;
+}
+.hero-producto{max-width:34ch;text-align:left;color:var(--papel)}
+.hero-producto .cejilla{color:var(--champan);display:block;margin-bottom:.6rem}
+.hero-producto h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(1.15rem,2.6vw,1.8rem);line-height:1.2;margin-bottom:1.1rem}
+.hero-contador{color:rgba(245,242,243,.6);font-size:10px;letter-spacing:.3em;display:none}
+@media (min-width:760px){.hero-contador{display:block}}
+.hero-contador b{color:var(--papel);font-weight:400}
+
+.hero-flecha{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:8;
+  width:46px;height:46px;display:none;align-items:center;justify-content:center;
+  border:1px solid rgba(245,242,243,.32);color:rgba(245,242,243,.78);
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+}
+.hero-flecha:hover{background:var(--papel);color:var(--tinta);border-color:var(--papel)}
+.hero-flecha.izq{left:clamp(26px,3.4vw,46px)}
+.hero-flecha.der{right:clamp(26px,3.4vw,46px)}
+@media (min-width:860px){.hero-flecha{display:flex}}
+
+.hero-indicadores{position:absolute;z-index:8;bottom:clamp(1.5rem,3.4vw,2.2rem);left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.hero-indicadores button{position:relative;width:44px;height:2px;background:rgba(245,242,243,.28);overflow:hidden}
+.hero-indicadores i{position:absolute;inset:0 auto 0 0;width:0;background:var(--papel);display:block}
+@media (max-width:759px){.hero-pie{justify-content:center}.hero-producto{text-align:center}}
+
+/* ==================== Beneficios ==================== */
+.beneficios{border-block:1px solid var(--linea);background:rgba(234,228,231,.42)}
+.beneficios-rejilla{display:grid;gap:2.2rem;padding-block:clamp(2.2rem,5vw,3rem)}
+@media (min-width:820px){.beneficios-rejilla{grid-template-columns:repeat(3,1fr);gap:3rem}}
+.beneficio{display:flex;gap:1.2rem;align-items:flex-start}
+.beneficio b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.5rem;color:var(--champan);line-height:1;padding-top:2px;flex-shrink:0}
+.beneficio h3{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;margin-bottom:.5rem}
+.beneficio p{font-size:13.5px;color:var(--gris);line-height:1.7}
+
+/* ==================== Cabecera de sección ==================== */
+.seccion{padding-block:clamp(3.2rem,8vw,6rem)}
+.cabeza-centro{text-align:center;margin-bottom:clamp(2.4rem,6vw,4rem)}
+.cabeza-centro .cejilla{display:block;margin-bottom:1.1rem}
+.cabeza-centro h2{font-size:clamp(1.9rem,5.4vw,3.2rem)}
+.cabeza-centro .filete{width:150px;margin:1.5rem auto 0}
+.cabeza-centro p{font-size:13.5px;color:var(--gris);max-width:44ch;margin:1.5rem auto 0;line-height:1.75}
+
+/* ==================== Índice de marcas ==================== */
+.indice{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.9rem;margin-bottom:clamp(1rem,3vw,2rem);border-bottom:1px solid var(--linea)}
+.indice button{
+  flex-shrink:0;padding:.5rem 1rem;border:1px solid var(--linea);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);
+  transition:color .3s var(--ease),border-color .3s var(--ease);
+}
+.indice button:hover{color:var(--tinta);border-color:var(--moka)}
+
+/* ==================== Fila de marca ==================== */
+.marca-fila{
+  padding-block:clamp(2.4rem,6vw,4rem);border-top:1px solid var(--linea);
+  content-visibility:auto;contain-intrinsic-size:auto 620px;
+  scroll-margin-top:clamp(80px,12vh,112px);
+}
+.marca-cabeza{display:flex;align-items:center;gap:clamp(1.1rem,3vw,2rem);margin-bottom:clamp(1.6rem,4vw,2.4rem);text-align:left;width:100%}
+.marca-sello{
+  width:clamp(72px,15vw,112px);aspect-ratio:1;flex-shrink:0;
+  border:1px solid var(--linea);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  transition:border-color .5s var(--ease),transform .5s var(--ease);
+}
+.marca-cabeza:hover .marca-sello{border-color:var(--moka);transform:scale(1.04)}
+.marca-sello img{width:100%;height:100%;object-fit:contain;padding:14%}
+.marca-sello span{font-family:'Bodoni Moda',serif;font-size:clamp(13px,3vw,18px);letter-spacing:.1em;text-transform:uppercase;color:var(--moka)}
+.marca-datos{min-width:0;flex:1}
+.marca-datos .cejilla{display:block;margin-bottom:.6rem;color:var(--vino)}
+.marca-datos h3{
+  font-size:clamp(1.4rem,4.6vw,2.6rem);letter-spacing:.03em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  transition:color .35s var(--ease);
+}
+.marca-cabeza:hover .marca-datos h3{color:var(--vino)}
+.marca-enlace{display:flex;align-items:center;gap:.85rem;margin-top:.9rem}
+.marca-enlace .filete{flex:0 0 clamp(30px,8vw,90px)}
+.marca-enlace em{font-style:normal;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);transition:color .35s var(--ease)}
+.marca-enlace svg{width:15px;height:15px;color:var(--gris);transition:transform .4s var(--ease),color .35s var(--ease)}
+.marca-cabeza:hover .marca-enlace em,.marca-cabeza:hover .marca-enlace svg{color:var(--tinta)}
+.marca-cabeza:hover .marca-enlace svg{transform:translateX(5px)}
+
+.tira{display:flex;gap:clamp(.9rem,2.4vw,1.4rem);overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;padding-bottom:.7rem;min-height:clamp(300px,62vw,400px)}
+.tira-mas{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;
+  aspect-ratio:3/4;color:var(--gris);transition:color .3s var(--ease);
+}
+.tira-mas:hover{color:var(--tinta)}
+.tira-mas b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:2.1rem;color:var(--moka)}
+.tira-mas em{font-style:normal;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase}
+.tira>*{flex:0 0 clamp(166px,44vw,232px);scroll-snap-align:start}
+.tira-barra{height:1px;background:var(--linea);position:relative}
+.tira-barra i{position:absolute;inset:0 auto 0 0;display:block;height:1px;background:var(--moka);width:0;transition:width .2s linear}
+
+/* ==================== Ficha de producto ==================== */
+/* Sin tarjeta ni recuadro: la foto se apoya sobre el papel de la página.
+   El marco 3/4 solo alinea las filas; no se ve. */
+.ficha{display:flex;flex-direction:column;position:relative}
+.ficha-media{position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;transition:transform .55s var(--ease)}
+@media (hover:hover){.ficha:hover .ficha-media{transform:translateY(-5px)}}
+.ficha-media img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  transition:opacity .7s var(--ease),transform .9s var(--ease);
+}
+.ficha-media .alterna{opacity:0}
+@media (hover:hover){
+  .ficha:hover .ficha-media .principal{transform:scale(1.06)}
+  .ficha:hover .ficha-media .alterna{opacity:1;transform:scale(1.06)}
+  .ficha:hover .ficha-media .tiene-alterna{opacity:0}
+}
+.ficha.agotada .ficha-media img{filter:grayscale(.34) opacity(.72)}
+
+.marca-stock{
+  position:absolute;top:2px;left:2px;z-index:6;pointer-events:none;
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+}
+.marca-stock.cero{color:var(--moka)}
+.marca-stock.poco{color:var(--champan)}
+
+/* La acción es una línea de texto bajo el precio: siempre visible,
+   también en teléfono, y no tapa la foto. */
+.sello{
+  margin-top:.85rem;padding-bottom:3px;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gris);
+  box-shadow:inset 0 -1px 0 var(--linea-media);
+  transition:color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.sello:hover{color:var(--tinta);box-shadow:inset 0 -1px 0 var(--tinta)}
+.sello.reservar{color:var(--moka);box-shadow:inset 0 -1px 0 rgba(107,82,69,.45)}
+.sello.reservar:hover{color:var(--tinta);box-shadow:inset 0 -1px 0 var(--moka)}
+
+.ficha-texto{padding:1.05rem .2rem 0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.ficha-texto .cejilla{display:block;margin-bottom:.6rem}
+.ficha-nombre{
+  font-family:'Bodoni Moda',serif;font-weight:400;font-size:14px;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em;
+}
+.ficha-texto .filete{width:26px;margin:.85rem 0;transition:width .55s var(--ease)}
+@media (hover:hover){.ficha:hover .ficha-texto .filete{width:64px}}
+.ficha-precio{font-size:13.5px;letter-spacing:.09em}
+.ficha-encargo{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--moka);margin-top:.55rem}
+
+/* Rotación declarada desde el administrador, resuelta con CSS.
+   El marco es 4/5, así que a 90° se intercambian las medidas. */
+.ficha-media img.gira-90,.ficha-media img.gira-270,
+.linea-media img.gira-90,.linea-media img.gira-270{width:133.333%;height:75%;left:50%;top:50%}
+.ficha-media img.gira-90,.linea-media img.gira-90{transform:translate(-50%,-50%) rotate(90deg)}
+.ficha-media img.gira-270,.linea-media img.gira-270{transform:translate(-50%,-50%) rotate(-90deg)}
+.ficha-media img.gira-180,.linea-media img.gira-180{transform:rotate(180deg)}
+.mini img.gira-90{transform:rotate(90deg)}
+.mini img.gira-270{transform:rotate(-90deg)}
+.mini img.gira-180{transform:rotate(180deg)}
+@media (hover:hover){
+  .ficha:hover .ficha-media img.gira-90{transform:translate(-50%,-50%) rotate(90deg) scale(1.05)}
+  .ficha:hover .ficha-media img.gira-270{transform:translate(-50%,-50%) rotate(-90deg) scale(1.05)}
+  .ficha:hover .ficha-media img.gira-180{transform:rotate(180deg) scale(1.05)}
+}
+
+/* ==================== Rejilla ==================== */
+.rejilla{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.4rem,3.4vw,2.6rem) clamp(.9rem,2.4vw,1.6rem)}
+@media (min-width:760px){.rejilla{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1080px){.rejilla{grid-template-columns:repeat(4,1fr)}}
+
+.volver{display:inline-flex;align-items:center;gap:.75rem;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);transition:color .3s var(--ease)}
+.volver:hover{color:var(--tinta)}
+.volver svg{width:15px;height:15px;transition:transform .35s var(--ease)}
+.volver:hover svg{transform:translateX(-4px)}
+
+.lista-cabeza{
+  display:flex;flex-direction:column;gap:1.6rem;
+  border-bottom:1px solid var(--linea-media);padding-bottom:1.5rem;margin-bottom:clamp(1.6rem,4vw,2.4rem);
+}
+@media (min-width:900px){.lista-cabeza{flex-direction:row;align-items:flex-end;justify-content:space-between}}
+.lista-cabeza .cejilla{display:block;margin-bottom:.8rem;color:var(--vino)}
+.lista-cabeza h2{font-size:clamp(1.6rem,4.6vw,2.6rem)}
+.conteo{font-size:11.5px;color:var(--gris);letter-spacing:.05em;margin-top:.7rem}
+.lista-controles{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+.control{
+  padding:.65rem 1.1rem;border:1px solid var(--linea-media);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gris);
+  transition:color .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);
+}
+.control:hover{color:var(--moka);border-color:var(--moka)}
+.control[aria-pressed="true"]{background:var(--moka);border-color:var(--moka);color:var(--papel)}
+select.control{background:transparent;outline:none;cursor:pointer}
+
+/* ==================== Detalle ==================== */
+.miga{display:flex;align-items:center;gap:.6rem;margin-block:1.6rem clamp(2rem,5vw,3rem);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gris)}
+.miga button:hover{color:var(--tinta)}
+.miga i{font-style:normal;color:var(--moka)}
+.miga .actual{color:var(--tinta);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:38vw}
+
+.detalle{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+@media (min-width:1000px){.detalle{grid-template-columns:1.42fr 1fr}}
+.galeria{display:flex;flex-direction:column-reverse;gap:.8rem}
+@media (min-width:760px){.galeria{flex-direction:row}}
+.miniaturas{display:flex;gap:.6rem;overflow:auto}
+@media (min-width:760px){.miniaturas{flex-direction:column;max-height:640px;flex:0 0 68px}}
+.mini{
+  position:relative;flex:0 0 58px;width:58px;aspect-ratio:3/4;overflow:hidden;
+  padding-bottom:7px;opacity:.4;transition:opacity .3s var(--ease);
+}
+@media (min-width:760px){.mini{flex:0 0 auto;width:64px}}
+.mini:hover{opacity:.78}
+.mini[aria-current="true"]{opacity:1}
+.mini[aria-current="true"]::after{content:"";position:absolute;inset:auto 14% 0 14%;height:1px;background:var(--tinta)}
+.mini img{width:100%;height:100%;object-fit:contain}
+.mini .vid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:100%;color:var(--gris)}
+.mini .vid em{font-style:normal;font-size:7px;letter-spacing:.24em;text-transform:uppercase}
+
+/* La foto o el video mandan su propia altura: nada se recorta ni se
+   encierra en un cuadrado. Solo hay un techo para que no desborde. */
+.lienzo{
+  position:relative;flex:1;min-width:0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  min-height:clamp(290px,50vh,540px);
+}
+.lienzo img,.lienzo video{
+  display:block;width:100%;height:auto;max-height:min(78vh,760px);object-fit:contain;
+  transition:opacity .45s var(--ease),transform .7s var(--ease);
+}
+.lienzo.zoom img{transform:scale(1.6)}
+.lienzo.cargando img{opacity:0}
+/* Con giro declarado sí hace falta un marco fijo para intercambiar medidas. */
+.lienzo.rotada{aspect-ratio:3/4;min-height:0}
+.lienzo.rotada img{position:absolute;top:50%;left:50%;max-height:none;width:133.333%;height:75%}
+.lienzo.rotada img.gira-90{transform:translate(-50%,-50%) rotate(90deg)}
+.lienzo.rotada img.gira-270{transform:translate(-50%,-50%) rotate(-90deg)}
+.lienzo.rotada img.gira-180{width:100%;height:100%;transform:translate(-50%,-50%) rotate(180deg)}
+
+.info{position:relative}
+@media (min-width:1000px){.info{position:sticky;top:120px}}
+.info>.cejilla{display:block;color:var(--vino)}
+.info h2{font-size:clamp(1.7rem,4.4vw,2.6rem);margin-top:.9rem;letter-spacing:.02em}
+.info-ref{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gris);margin-top:.9rem}
+.info>.filete{margin-block:clamp(1.5rem,3.6vw,2.1rem)}
+.info-precio-fila{display:flex;align-items:flex-end;justify-content:space-between;gap:1.2rem}
+.info-precio{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.6rem);line-height:1}
+.info-estado{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gris);text-align:right}
+.info-estado.poco{color:var(--champan)}
+.info-estado.cero{color:var(--moka)}
+
+.aviso-encargo{border-left:2px solid var(--moka);background:rgba(107,82,69,.05);padding:1rem 1.2rem;margin-top:1.6rem}
+.aviso-encargo .cejilla{color:var(--moka);display:block;margin-bottom:.6rem}
+.aviso-encargo p{font-size:13px;color:var(--gris);line-height:1.7}
+.aviso-encargo strong{color:var(--tinta);font-weight:400}
+
+.compra{display:flex;gap:.7rem;margin-top:1.9rem}
+.paso{display:flex;align-items:center;border:1px solid var(--linea-media);background:var(--blanco)}
+.paso button{width:42px;min-height:52px;font-size:17px;color:var(--gris);transition:color .25s var(--ease)}
+.paso button:hover{color:var(--tinta)}
+.paso span{width:34px;text-align:center;font-size:13.5px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;padding:0 1.7rem;position:relative;overflow:hidden;isolation:isolate;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--tinta);color:var(--papel);
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform .9s var(--ease);
+}
+.btn:hover::after{transform:translateX(120%)}
+.btn:hover{background:var(--vino)}
+.btn-ancho{flex:1;width:100%}
+.btn-linea{background:transparent;color:var(--tinta);border:1px solid var(--linea-media)}
+.btn-linea:hover{background:var(--nacar);color:var(--tinta);border-color:var(--tinta)}
+.btn-moka{background:var(--moka)}
+.btn-moka:hover{background:var(--tinta)}
+.btn-vino{background:var(--vino)}
+.btn-vino:hover{background:var(--tinta)}
+.btn-claro{background:rgba(245,242,243,.94);color:var(--tinta);min-height:44px}
+.btn-claro:hover{background:var(--papel);color:var(--tinta)}
+
+.plegables{margin-top:clamp(2rem,5vw,2.8rem);border-top:1px solid var(--linea)}
+.plegable{border-bottom:1px solid var(--linea)}
+.plegable>button{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;text-align:left}
+.plegable>button span{font-size:10px;letter-spacing:.28em;text-transform:uppercase;transition:color .3s var(--ease)}
+.plegable>button:hover span{color:var(--vino)}
+.plegable>button i{font-style:normal;font-size:17px;color:var(--moka);line-height:1;transition:transform .35s var(--ease)}
+.plegable[data-abierto="true"]>button i{transform:rotate(45deg)}
+.plegable-cuerpo{overflow:hidden;height:0;transition:height .45s var(--ease)}
+.plegable-cuerpo p{font-size:13.5px;color:var(--gris);line-height:1.8;padding-bottom:1.5rem;white-space:pre-line;max-width:64ch}
+
+/* ==================== Vacíos ==================== */
+.vacio{grid-column:1/-1;text-align:center;padding:clamp(3rem,10vw,5.5rem) 1.2rem;border:1px dashed var(--linea-media)}
+.vacio .cejilla{display:block;color:var(--vino);margin-bottom:1.1rem}
+.vacio h3{font-size:clamp(1.3rem,3.6vw,1.9rem);margin-bottom:.9rem}
+.vacio p{font-size:13.5px;color:var(--gris);max-width:42ch;margin:0 auto 2rem}
+
+/* ==================== Esqueleto ==================== */
+.esqueleto{position:relative;overflow:hidden;background:var(--nacar)}
+.esqueleto::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+  transform:translateX(-100%);animation:brillo 1.5s infinite;
+}
+@keyframes brillo{to{transform:translateX(100%)}}
+
+/* Entrada del bloque de texto del hero en cada lámina */
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#hero-producto{animation:entra .85s var(--ease) both}
+
+/* Centinela de carga por lotes */
+.centinela{height:1px}
+
+/* ==================== Revelado ==================== */
+[data-revelar]{opacity:0;transform:translateY(18px)}
+[data-revelar].visible{opacity:1;transform:none;transition:opacity .85s var(--ease),transform .85s var(--ease)}
+
+/* ==================== Cesta ==================== */
+.telon{
+  position:fixed;inset:0;z-index:70;display:flex;justify-content:flex-end;
+  background:rgba(20,17,26,.5);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+}
+.telon.abierto{opacity:1;pointer-events:auto}
+.cajon{
+  width:min(100%,448px);height:100%;background:var(--papel);
+  display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .5s var(--ease);
+  box-shadow:-30px 0 80px -50px rgba(20,17,26,.9);
+}
+.telon.abierto .cajon{transform:none}
+.cajon-cabeza{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.5rem var(--gutter);border-bottom:1px solid var(--linea);flex-shrink:0}
+.cajon-cabeza .cejilla{display:block;color:var(--vino);margin-bottom:.5rem}
+.cajon-cabeza h2{font-size:1.55rem}
+.cajon-cuerpo{flex:1;overflow-y:auto;padding:1.5rem var(--gutter)}
+.cajon-pie{flex-shrink:0;border-top:1px solid var(--linea);background:rgba(234,228,231,.5);padding:1.4rem var(--gutter)}
+
+.linea-cesta{display:flex;gap:1.1rem;padding-bottom:1.4rem;margin-bottom:1.4rem;border-bottom:1px solid var(--linea)}
+.linea-cesta:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.linea-media{position:relative;flex:0 0 70px;width:70px;aspect-ratio:3/4;overflow:hidden}
+.linea-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.linea-media.encargo img{opacity:.6}
+.linea-datos{flex:1;min-width:0}
+.linea-datos .cejilla{display:block;margin-bottom:.4rem}
+.linea-datos h4{font-family:'Bodoni Moda',serif;font-weight:400;font-size:13.5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pastilla{display:inline-block;margin-top:.6rem;padding:3px 8px;background:rgba(107,82,69,.1);color:var(--moka);font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.linea-fila{display:flex;align-items:center;justify-content:space-between;margin-top:.9rem}
+.paso-mini{display:flex;align-items:center;border:1px solid var(--linea-media)}
+.paso-mini button{width:30px;height:30px;color:var(--gris);font-size:14px}
+.paso-mini button:hover{color:var(--tinta)}
+.paso-mini span{width:26px;text-align:center;font-size:12px}
+.linea-importe{font-size:13px;letter-spacing:.06em}
+.quitar{margin-top:.8rem;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gris);transition:color .3s var(--ease)}
+.quitar:hover{color:var(--vino)}
+
+.desglose{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem}
+.desglose div{display:flex;justify-content:space-between;font-size:11.5px;color:var(--gris);letter-spacing:.05em}
+.desglose .encargo{color:var(--moka)}
+.desglose .total{
+  align-items:baseline;padding-top:.9rem;margin-top:.4rem;border-top:1px solid var(--linea);
+  color:var(--tinta);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+}
+.desglose .total b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.55rem;letter-spacing:0}
+
+.formulario{display:flex;flex-direction:column;gap:1.15rem}
+.formulario input,.formulario select{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--linea-media);
+  padding:.65rem 0;font-size:15px;outline:none;transition:border-color .3s var(--ease);
+}
+.formulario input:focus,.formulario select:focus{border-color:var(--tinta)}
+.formulario input::placeholder{color:var(--gris)}
+.formulario select{color:var(--gris)}
+.datos-cabeza{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.datos-cabeza .cejilla{color:var(--vino)}
+.datos-cabeza button{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gris)}
+.datos-cabeza button:hover{color:var(--tinta)}
+
+/* ==================== Modal reserva ==================== */
+.modal{position:fixed;inset:0;z-index:90;background:rgba(20,17,26,.6);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:1.2rem}
+.modal.abierto{display:flex}
+.modal-caja{background:var(--papel);width:min(100%,420px);padding:clamp(1.8rem,5vw,2.4rem);border-top:2px solid var(--moka);box-shadow:0 40px 90px -60px rgba(20,17,26,.9)}
+.modal-caja .cejilla{display:block;color:var(--moka);margin-bottom:.9rem}
+.modal-caja h3{font-size:1.5rem;line-height:1.3;margin-bottom:1.1rem}
+.modal-caja p{font-size:13.5px;color:var(--gris);line-height:1.75;margin-bottom:1.9rem}
+.modal-botones{display:flex;gap:.8rem}
+.modal-botones .btn{flex:1;padding-inline:.8rem}
+
+/* ==================== Aviso flotante ==================== */
+.aviso{
+  position:fixed;left:50%;bottom:1.6rem;z-index:95;max-width:calc(100vw - 2.4rem);
+  transform:translate(-50%,220%);transition:transform .5s var(--ease);
+  background:var(--tinta);color:var(--papel);
+  display:flex;align-items:center;gap:.9rem;padding:.95rem 1.4rem;
+  box-shadow:0 30px 60px -40px rgba(20,17,26,.9);
+}
+.aviso.visible{transform:translate(-50%,0)}
+.aviso i{width:6px;height:6px;background:var(--champan);flex-shrink:0}
+.aviso.encargo i{background:var(--moka)}
+.aviso span{font-size:11.5px;letter-spacing:.05em}
+
+/* ==================== Botón arriba ==================== */
+.arriba{
+  position:fixed;right:1.4rem;bottom:1.6rem;z-index:45;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--tinta);color:var(--papel);
+  opacity:0;pointer-events:none;transition:opacity .45s var(--ease),background .3s var(--ease);
+}
+.arriba.visible{opacity:1;pointer-events:auto}
+.arriba:hover{background:var(--vino)}
+
+/* ==================== Pie ==================== */
+.pie{background:var(--tinta);color:var(--nacar);margin-top:clamp(3rem,8vw,5rem)}
+.pie-rejilla{display:grid;gap:2.8rem;padding-block:clamp(3rem,7vw,4.5rem)}
+@media (min-width:820px){.pie-rejilla{grid-template-columns:1.4fr 1fr 1fr;gap:3.5rem}}
+.pie h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--papel)}
+.pie .cejilla-champan{display:block;margin-top:.7rem}
+.pie p{font-size:13px;color:rgba(234,228,231,.62);line-height:1.8;margin-top:1.4rem;max-width:36ch}
+.pie h4{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(234,228,231,.45);margin-bottom:1.3rem;font-weight:400}
+.pie li{font-size:13px;color:rgba(234,228,231,.62);line-height:2}
+.pie li a{transition:color .3s var(--ease)}
+.pie li a:hover{color:var(--champan)}
+.pie-base{
+  border-top:1px solid rgba(245,242,243,.1);display:flex;flex-wrap:wrap;
+  justify-content:space-between;gap:.7rem;padding-block:1.4rem;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(234,228,231,.4);
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  [data-revelar]{opacity:1;transform:none}
+  .tira{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<aside class="riel" aria-hidden="true">
+  <div class="riel-progreso" id="riel-progreso"></div>
+  <span>Zona Glam Supply — Tovar, Mérida</span>
+</aside>
+
+<div class="cinta">
+  <div class="marquesina" id="marquesina"></div>
+</div>
+
+<nav class="nav" id="nav">
+  <div class="nav-fila">
+    <button class="logo" data-accion="inicio" aria-label="Volver al inicio">
+      <b>Zona Glam</b><i>Supply · Todo para uñas</i>
+    </button>
+
+    <div class="buscador">
+      <input type="search" id="busqueda" placeholder="Buscar producto, marca o referencia" autocomplete="off">
+      <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+    </div>
+
+    <div class="nav-acciones">
+      <button class="btn-lupa" data-accion="lupa" aria-label="Buscar">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+      </button>
+      <button class="btn-cesta" data-accion="abrir-cesta" aria-label="Abrir la cesta">
+        <span class="cejilla">Cesta</span>
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 10V7a4 4 0 00-8 0v3M5 9h14l1 12H4L5 9z"/></svg>
+        <span class="contador" id="contador">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="buscador-movil" id="buscador-movil">
+    <div class="envoltura">
+      <input type="search" id="busqueda-movil" placeholder="Buscar producto, marca o referencia" autocomplete="off">
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <div id="cargando" class="envoltura seccion">
+    <div class="esqueleto" style="height:clamp(300px,52vh,520px);margin-bottom:3rem"></div>
+    <div style="display:flex;justify-content:center;margin-bottom:2.5rem"><div class="esqueleto" style="width:112px;height:112px;border-radius:50%"></div></div>
+    <div class="rejilla">
+      <div class="esqueleto" style="aspect-ratio:4/5"></div>
+      <div class="esqueleto" style="aspect-ratio:4/5"></div>
+      <div class="esqueleto" style="aspect-ratio:4/5"></div>
+      <div class="esqueleto" style="aspect-ratio:4/5"></div>
+    </div>
+    <p class="cejilla" style="text-align:center;margin-top:2.5rem">Preparando la colección</p>
+  </div>
+
+  <!-- ================= Inicio ================= -->
+  <section id="vista-inicio" class="oculto">
+
+    <div class="hero oculto" id="hero">
+      <div class="hero-pista" id="hero-pista"></div>
+      <div class="hero-velo"></div>
+
+      <div class="hero-texto">
+        <span class="cejilla">Acrílicos · Geles · Decoración · Mayor y detal</span>
+        <h2 class="display">El catálogo completo, marca por marca</h2>
+        <div class="filete"></div>
+      </div>
+
+      <button class="hero-flecha izq" data-accion="hero" data-dir="-1" aria-label="Anterior">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="hero-flecha der" data-accion="hero" data-dir="1" aria-label="Siguiente">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <div class="hero-pie">
+        <div class="hero-producto" id="hero-producto"></div>
+        <div class="hero-contador" id="hero-contador"></div>
+      </div>
+
+      <div class="hero-indicadores" id="hero-indicadores"></div>
+    </div>
+
+    <div class="beneficios">
+      <div class="envoltura beneficios-rejilla">
+        <div class="beneficio" data-revelar>
+          <b>01</b>
+          <div><h3>Elige en el catálogo</h3><p>Explora por marca y mira fotos y videos reales de cada producto.</p></div>
+        </div>
+        <div class="beneficio" data-revelar>
+          <b>02</b>
+          <div><h3>Arma tu cesta</h3><p>Suma unidades y confirma el total en dólares antes de pedir.</p></div>
+        </div>
+        <div class="beneficio" data-revelar>
+          <b>03</b>
+          <div><h3>Cierras por WhatsApp</h3><p>Tu pedido llega con tus datos listos. Coordinamos pago y envío.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="envoltura seccion">
+      <header class="cabeza-centro" data-revelar>
+        <span class="cejilla cejilla-vino">El surtido</span>
+        <h2 class="display">Nuestras marcas</h2>
+        <div class="filete"></div>
+        <p>Cada marca con su selección disponible. Toca una marca para ver todo su catálogo.</p>
+      </header>
+      <div class="indice sin-barra" id="indice-marcas"></div>
+      <div id="lista-marcas"></div>
+    </div>
+  </section>
+
+  <!-- ================= Listado ================= -->
+  <section id="vista-lista" class="envoltura seccion oculto">
+    <button class="volver" data-accion="inicio">
+      <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 19l-7-7 7-7M3 12h18"/></svg>
+      Todas las marcas
+    </button>
+
+    <div class="lista-cabeza" style="margin-top:1.6rem">
+      <div>
+        <span class="cejilla" id="lista-cejilla">Colección</span>
+        <h2 class="display" id="lista-titulo">Catálogo</h2>
+        <p class="conteo" id="lista-conteo"></p>
+      </div>
+      <div class="lista-controles">
+        <button class="control" id="control-stock" data-accion="solo-stock" aria-pressed="false">Solo con stock</button>
+        <select class="control" id="control-orden" aria-label="Ordenar">
+          <option value="destacado">Orden sugerido</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="rejilla" id="rejilla-productos"></div>
+    <div class="centinela oculto" id="centinela" aria-hidden="true"></div>
+  </section>
+
+  <!-- ================= Detalle ================= -->
+  <section id="vista-detalle" class="envoltura seccion oculto">
+    <button class="volver" data-accion="volver">
+      <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 19l-7-7 7-7M3 12h18"/></svg>
+      <span id="volver-texto">Volver al catálogo</span>
+    </button>
+
+    <nav class="miga" aria-label="Ruta">
+      <button data-accion="inicio">Catálogo</button><i>/</i>
+      <button data-accion="volver-marca" id="miga-marca">Marca</button><i>/</i>
+      <span class="actual" id="miga-producto"></span>
+    </nav>
+
+    <div class="detalle">
+      <div class="galeria">
+        <div class="miniaturas sin-barra" id="miniaturas"></div>
+        <div class="lienzo" id="lienzo">
+          <img id="lienzo-img" alt="">
+          <video id="lienzo-video" class="oculto" muted loop playsinline preload="none"></video>
+        </div>
+      </div>
+
+      <div class="info">
+        <span class="cejilla" id="d-marca"></span>
+        <h2 class="display" id="d-nombre"></h2>
+        <p class="info-ref" id="d-ref"></p>
+
+        <div class="filete"></div>
+
+        <div class="info-precio-fila">
+          <span class="info-precio" id="d-precio"></span>
+          <span class="info-estado" id="d-estado"></span>
+        </div>
+
+        <div class="aviso-encargo oculto" id="d-encargo">
+          <span class="cejilla">Sin stock en este momento</span>
+          <p>Puedes reservarlo: queda en tu pedido marcado como <strong>por encargo</strong> y te escribimos apenas llegue. No se cobra hasta confirmar disponibilidad y fecha.</p>
+        </div>
+
+        <div class="compra">
+          <div class="paso">
+            <button data-accion="cantidad" data-delta="-1" aria-label="Quitar una unidad">−</button>
+            <span id="d-cantidad">1</span>
+            <button data-accion="cantidad" data-delta="1" aria-label="Añadir una unidad">+</button>
+          </div>
+          <button class="btn btn-ancho" id="d-agregar" data-accion="agregar-detalle">Añadir a la cesta</button>
+        </div>
+
+        <button class="btn btn-linea btn-ancho" style="margin-top:.7rem" data-accion="consultar">Consultar por WhatsApp</button>
+
+        <div class="plegables">
+          <div class="plegable" data-abierto="true">
+            <button data-accion="plegar"><span>Descripción</span><i>+</i></button>
+            <div class="plegable-cuerpo"><p id="d-descripcion"></p></div>
+          </div>
+          <div class="plegable">
+            <button data-accion="plegar"><span>Envíos</span><i>+</i></button>
+            <div class="plegable-cuerpo"><p>Retiro en tienda en Tovar sin costo. Envíos nacionales por MRW y ZOOM; el flete lo cancelas al recibir en la agencia. Despachamos el mismo día si confirmas antes de las 2:00 p.m.</p></div>
+          </div>
+          <div class="plegable">
+            <button data-accion="plegar"><span>Formas de pago</span><i>+</i></button>
+            <div class="plegable-cuerpo"><p>Pago móvil y transferencia en bolívares a la tasa del día, divisas en efectivo o Binance (USDT). Los precios del catálogo están en dólares.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="similares-bloque" class="oculto" style="margin-top:clamp(3.5rem,9vw,6rem);padding-top:clamp(2.4rem,6vw,3.6rem);border-top:1px solid var(--linea)">
+      <header class="cabeza-centro">
+        <span class="cejilla cejilla-vino">De la misma marca</span>
+        <h2 class="display" style="font-size:clamp(1.5rem,4vw,2.2rem)">También te puede gustar</h2>
+      </header>
+      <div class="rejilla" id="similares"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie oculto" id="pie">
+  <div class="envoltura pie-rejilla">
+    <div>
+      <h3>Zona Glam</h3>
+      <span class="cejilla cejilla-champan">Supply · Todo para uñas</span>
+      <p>Insumos y productos para uñas al mayor y detal. Atendemos desde Tovar para toda Venezuela.</p>
+    </div>
+    <div>
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="https://wa.me/584148430701" target="_blank" rel="noopener">WhatsApp 0414 843 0701</a></li>
+        <li>Lunes a sábado, 9:00 a.m. – 6:00 p.m.</li>
+        <li>Tovar, estado Mérida</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Pagos y envíos</h4>
+      <ul>
+        <li>Pago móvil · Transferencia · Divisas · Binance</li>
+        <li>MRW · ZOOM · Retiro en tienda</li>
+      </ul>
+    </div>
+  </div>
+  <div class="envoltura"><div class="pie-base">
+    <span>© <span id="anio">2026</span> Zona Glam Supply</span>
+    <span>Precios en dólares · Sujetos a disponibilidad</span>
+  </div></div>
+</footer>
+
+<button class="arriba" id="arriba" data-accion="arriba" aria-label="Volver arriba">
+  <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"><i></i><span id="aviso-texto"></span></div>
+
+<!-- ================= Cesta ================= -->
+<div class="telon" id="telon-cesta" data-telon>
+  <aside class="cajon" role="dialog" aria-label="Tu cesta">
+    <div class="cajon-cabeza">
+      <div>
+        <span class="cejilla">Tu pedido</span>
+        <h2 class="display">Cesta (<span id="contador-texto">0</span>)</h2>
+      </div>
+      <button data-accion="cerrar-cesta" aria-label="Cerrar la cesta">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="cajon-cuerpo" id="cesta-cuerpo"></div>
+
+    <div class="cajon-pie" id="cesta-resumen">
+      <div class="desglose" id="desglose"></div>
+      <button class="btn btn-ancho" data-accion="ir-datos">Continuar con mis datos</button>
+      <p style="text-align:center;margin-top:.9rem;font-size:11px;color:var(--gris)">El pedido se confirma por WhatsApp</p>
+    </div>
+
+    <div class="cajon-pie oculto" id="cesta-datos" style="background:var(--papel);max-height:76vh;overflow-y:auto">
+      <div class="datos-cabeza">
+        <span class="cejilla">Datos de entrega</span>
+        <button data-accion="volver-resumen">Volver</button>
+      </div>
+
+      <div class="aviso-encargo oculto" id="form-encargo" style="margin:0 0 1.3rem"><p id="form-encargo-texto"></p></div>
+
+      <div class="formulario">
+        <input type="text" id="c-nombre" placeholder="Nombre y apellido" autocomplete="name">
+        <input type="text" id="c-cedula" placeholder="Cédula de identidad" inputmode="numeric">
+        <input type="tel" id="c-telefono" placeholder="Número de teléfono" autocomplete="tel">
+        <select id="c-envio">
+          <option value="" disabled selected>¿Cómo lo recibes?</option>
+          <option>Retiro en tienda (Tovar)</option>
+          <option>MRW</option>
+          <option>ZOOM</option>
+          <option>Otro (lo indico abajo)</option>
+        </select>
+        <input type="text" id="c-direccion" placeholder="Dirección de envío o agencia">
+        <select id="c-pago">
+          <option>Bolívares (pago móvil / transferencia)</option>
+          <option>Divisas ($ efectivo)</option>
+          <option>Binance (USDT)</option>
+        </select>
+      </div>
+
+      <div class="desglose" id="desglose-2" style="margin-top:1.6rem"></div>
+      <button class="btn btn-vino btn-ancho" data-accion="enviar-pedido">Enviar pedido por WhatsApp</button>
+    </div>
+  </aside>
+</div>
+
+<!-- ================= Reserva ================= -->
+<div class="modal" id="modal-reserva" data-telon>
+  <div class="modal-caja" role="dialog" aria-label="Confirmar reserva">
+    <span class="cejilla">Sin stock ahora</span>
+    <h3 class="display" id="reserva-nombre"></h3>
+    <p>Este producto está agotado. Puedes dejarlo en tu cesta como reserva: lo incluimos en tu pedido marcado como “por encargo” y te avisamos apenas llegue. No se cobra hasta confirmar disponibilidad.</p>
+    <div class="modal-botones">
+      <button class="btn btn-linea" data-accion="cancelar-reserva">Cancelar</button>
+      <button class="btn btn-moka" data-accion="confirmar-reserva">Reservar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ===================================================================
+   Estado
+   =================================================================== */
+const WHATSAPP     = '584148430701';
+const CLAVE_CACHE  = 'zonaGlam:catalogo:v3';
+const CLAVE_CESTA  = 'zonaGlam:cesta:v2';
+const DURACION     = 7000;
+const CAMPOS_FOTO  = ['foto','foto_secundaria','foto_3','foto_4','foto_5','foto_6','foto_7'];
+const CAMPOS_VIDEO = ['video','video_2','video_3','video_4'];
+const PLACEHOLDER  = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23EAE4E7'/%3E%3Ctext x='200' y='252' text-anchor='middle' font-family='Didot,Georgia,serif' font-size='16' fill='%23A9A2AC' letter-spacing='5'%3EZONA GLAM%3C/text%3E%3C/svg%3E";
+
+const CINTA = [
+  'Envíos a toda Venezuela por MRW y ZOOM',
+  'Retiro en tienda en Tovar',
+  'Pago móvil, divisas y Binance',
+  'Todo para uñas: acrílicos, geles y decoración'
+];
+
+let productos = [], porId = new Map(), marcas = [];
+let cesta = [];
+let vista = 'inicio', marcaActual = '', textoBusqueda = '';
+let soloStock = false, orden = 'destacado';
+let detalle = null, cantidadDetalle = 1, medios = [];
+let reservaPendiente = null;
+let laminas = [], laminaActual = 0, timerHero = null;
+let timerAviso = null, timerBusqueda = null;
+let restaurando = false, scrollGuardado = 0;
+const tiras = [];
+
+const $  = (s,r) => (r||document).querySelector(s);
+const $$ = (s,r) => Array.from((r||document).querySelectorAll(s));
+
+const valido = v => typeof v === 'string' && v.trim() !== '' && v !== 'null' && v !== 'undefined';
+const esc    = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const precio = v => '$' + (Number(v) || 0).toFixed(2);
+const plural = (n,s,p) => n + ' ' + (n === 1 ? s : p);
+const limpiar = t => String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const dosDig = n => String(n).padStart(2,'0');
+const barajar = a => a.map(v => [Math.random(), v]).sort((x,y) => x[0] - y[0]).map(v => v[1]);
+
+function stockDe(p){ return (p && p.stock !== null && p.stock !== undefined && p.stock !== '') ? parseInt(p.stock,10) : null; }
+function agotado(p){ const s = stockDe(p); return s !== null && s <= 0; }
+function marcaDe(p){ return valido(p.marca) ? p.marca.trim() : 'Sin marca'; }
+function slug(t){ return limpiar(t).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+
+/* Rotación declarada desde el administrador: una clase CSS, sin canvas. */
+function giro(p, campo){
+  if (!p) return '';
+  const candidatos = [p['rotacion_'+campo], p[campo+'_rotacion'], p.rotacion_foto, p.rotacion_imagen, p.rotacion];
+  for (const v of candidatos){
+    const n = parseInt(v,10);
+    if (!Number.isFinite(n)) continue;
+    const g = ((n % 360) + 360) % 360;
+    if (g === 90 || g === 180 || g === 270) return ' gira-'+g;
+  }
+  return '';
+}
+
+/* ===================================================================
+   Avisos y revelado
+   =================================================================== */
+function aviso(texto, tono){
+  const el = $('#aviso');
+  $('#aviso-texto').textContent = texto;
+  el.classList.toggle('encargo', tono === 'encargo');
+  el.classList.add('visible');
+  clearTimeout(timerAviso);
+  timerAviso = setTimeout(() => el.classList.remove('visible'), 3000);
+}
+
+const observadorRevelar = new IntersectionObserver(entradas => {
+  entradas.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    observadorRevelar.unobserve(e.target);
+  });
+}, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+
+function revelar(raiz){
+  $$('[data-revelar]:not(.visible)', raiz || document).forEach(el => observadorRevelar.observe(el));
+}
+
+/* Las tiras se arman al acercarse y solo se desplazan solas si se ven.
+   Así el inicio no tiene que dibujar el catálogo entero de golpe. */
+const TOPE_TIRA = 12;
+const observadorTiras = new IntersectionObserver(entradas => {
+  entradas.forEach(e => { e.target.visible = e.isIntersecting; });
+}, { threshold:.08, rootMargin:'120px' });
+
+const observadorFilas = new IntersectionObserver(entradas => {
+  entradas.forEach(e => {
+    if (!e.isIntersecting) return;
+    const tira = e.target.querySelector('.tira');
+    if (tira && tira.dataset.lleno !== '1') llenarTira(tira);
+    observadorFilas.unobserve(e.target);
+  });
+}, { threshold:0, rootMargin:'600px' });
+
+function llenarTira(el){
+  el.dataset.lleno = '1';
+  const m = marcas[Number(el.dataset.tira)];
+  if (!m || !m.orden) return;
+  let html = m.orden.slice(0, TOPE_TIRA).map(ficha).join('');
+  if (m.orden.length > TOPE_TIRA){
+    html += '<button class="tira-mas" data-accion="marca" data-marca="' + esc(m.nombre) + '">' +
+              '<b>+' + (m.orden.length - TOPE_TIRA) + '</b><em>Ver toda la marca</em>' +
+            '</button>';
+  }
+  el.innerHTML = html;
+  revelar(el);
+}
+
+/* ===================================================================
+   Carga
+   =================================================================== */
+async function iniciar(){
+  $('#anio').textContent = new Date().getFullYear();
+  $('#marquesina').innerHTML = [...CINTA, ...CINTA].map(t => '<span>'+esc(t)+'</span>').join('');
+  leerCesta();
+
+  let pintado = false;
+  try {
+    const guardado = sessionStorage.getItem(CLAVE_CACHE);
+    if (guardado){ aplicar(JSON.parse(guardado), false); pintado = true; }
+  } catch(_){}
+
+  try {
+    const res  = await fetch('api.php?action=productos', { credentials:'same-origin' });
+    const data = await res.json();
+    if (!data || !Array.isArray(data.productos)) throw new Error('Respuesta inesperada');
+    try { sessionStorage.setItem(CLAVE_CACHE, JSON.stringify(data)); } catch(_){}
+    if (!pintado) aplicar(data, false);
+    else if (vista === 'inicio') aplicar(data, true);
+    else indexar(data.productos);
+  } catch(e){
+    console.error('[Zona Glam]', e);
+    if (pintado) return;
+    $('#cargando').innerHTML =
+      '<div class="vacio"><span class="cejilla cejilla-vino">Sin conexión con el catálogo</span>' +
+      '<h3 class="display">No pudimos cargar los productos</h3>' +
+      '<p>Revisa tu conexión y vuelve a intentarlo.</p>' +
+      '<button class="btn" data-accion="recargar">Reintentar</button></div>';
+  }
+}
+
+function indexar(lista){
+  productos = (lista || []).filter(p => CAMPOS_FOTO.some(k => valido(p[k])));
+  porId = new Map(productos.map(p => [String(p.id), p]));
+
+  const mapa = new Map();
+  productos.forEach(p => {
+    const m = marcaDe(p);
+    if (!mapa.has(m)) mapa.set(m, { nombre:m, logo:p.foto_marca, items:[] });
+    const grupo = mapa.get(m);
+    if (!valido(grupo.logo) && valido(p.foto_marca)) grupo.logo = p.foto_marca;
+    grupo.items.push(p);
+  });
+  marcas = Array.from(mapa.values()).sort((a,b) => a.nombre.localeCompare(b.nombre,'es'));
+}
+
+function aplicar(data, soloRefrescar){
+  indexar(data.productos);
+
+  $('#cargando').classList.add('oculto');
+  $('#pie').classList.remove('oculto');
+
+  if (!soloRefrescar) montarHero(data.carruselprincipalcatalogo);
+  montarMarcas();
+  pintarCesta();
+
+  if (!soloRefrescar){
+    try { history.replaceState({ vista:'inicio' }, ''); } catch(_){}
+    cambiarVista('inicio');
+    revelar();
+  }
+}
+
+/* ===================================================================
+   Hero
+   =================================================================== */
+function montarHero(config){
+  laminas = [];
+
+  if (config){
+    ['foto_1','foto_2','foto_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'img', url:config[k].trim() }); });
+    ['video_1','video_2','video_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'video', url:config[k].trim() }); });
+  }
+
+  // Un video por marca. Cada uno lleva la foto del producto como respaldo.
+  const videos = [], vistas = new Set();
+  productos.forEach(p => {
+    CAMPOS_VIDEO.forEach(k => {
+      if (!valido(p[k])) return;
+      const m = marcaDe(p);
+      if (vistas.has(m)) return;
+      vistas.add(m);
+      videos.push({ tipo:'video', url:p[k].trim(), poster:valido(p.foto) ? p.foto.trim() : '',
+                    id:String(p.id), nombre:p.nombre, marca:m });
+    });
+  });
+
+  // Fotos de producto al azar: cambian en cada visita, cubren mientras
+  // el video carga y se quedan si el video no llega a cargar.
+  const fotos = barajar(productos.filter(p => valido(p.foto))).slice(0,5).map(p => ({
+    tipo:'img', url:p.foto.trim(), poster:p.foto.trim(),
+    id:String(p.id), nombre:p.nombre, marca:marcaDe(p)
+  }));
+
+  laminas = laminas.concat(barajar(videos.concat(fotos))).slice(0, 6);
+  if (!laminas.length) return;
+
+  $('#hero-pista').innerHTML = laminas.map((l,i) => {
+    const prioridad = i ? 'loading="lazy"' : 'fetchpriority="high"';
+    const poster = valido(l.poster) ? esc(l.poster) : '';
+    const respaldo = poster ? '<img class="hero-poster kenburns" src="' + poster + '" alt="" ' + prioridad + ' decoding="async">' : '';
+    return '<div class="hero-lamina' + (i ? '' : ' activa') + '" data-lamina="' + i + '">' +
+      (l.tipo === 'img'
+        ? '<img class="hero-poster kenburns" src="' + esc(l.url) + '" alt="" ' + prioridad + ' decoding="async">'
+        : respaldo + '<video src="' + esc(l.url) + '"' + (poster ? ' poster="' + poster + '"' : '') +
+          ' muted loop playsinline preload="' + (i ? 'none' : 'auto') + '"></video>') +
+    '</div>';
+  }).join('');
+
+  // Si un video falla, se retira y queda la foto que hay debajo.
+  $$('#hero-pista video').forEach(v => v.addEventListener('error', () => v.remove(), { once:true }));
+
+  $('#hero-indicadores').innerHTML = laminas.map((_,i) =>
+    '<button data-accion="hero-ir" data-i="' + i + '" aria-label="Ir al destacado ' + (i+1) + '"><i data-relleno="' + i + '"></i></button>'
+  ).join('');
+
+  $('#hero').classList.remove('oculto');
+  pintarLamina(0);
+  autoplay();
+}
+
+function pintarLamina(i){
+  laminaActual = (i + laminas.length) % laminas.length;
+
+  $$('[data-lamina]').forEach((el,n) => {
+    const activo = n === laminaActual;
+    el.classList.toggle('activa', activo);
+    const vid = el.querySelector('video');
+    const img = el.querySelector('img');
+    if (activo){
+      if (img){ img.classList.remove('kenburns'); void img.offsetWidth; img.classList.add('kenburns'); }
+      if (vid){ vid.preload = 'auto'; vid.currentTime = 0; vid.play().catch(()=>{}); }
+    } else if (vid) vid.pause();
+  });
+
+  const l = laminas[laminaActual];
+  $('#hero-producto').innerHTML = (l && l.nombre)
+    ? '<span class="cejilla">' + esc(l.marca) + '</span>' +
+      '<h3>' + esc(l.nombre) + '</h3>' +
+      '<button class="btn btn-claro" data-accion="ver" data-id="' + esc(l.id) + '">Ver producto</button>'
+    : '';
+
+  const bloque = $('#hero-producto');
+  bloque.style.animation = 'none'; void bloque.offsetWidth; bloque.style.animation = '';
+
+  $('#hero-contador').innerHTML = '<b>' + dosDig(laminaActual+1) + '</b> — ' + dosDig(laminas.length);
+
+  $$('[data-relleno]').forEach((el,n) => {
+    el.style.transition = 'none';
+    el.style.width = n < laminaActual ? '100%' : '0%';
+  });
+  const relleno = $('[data-relleno="' + laminaActual + '"]');
+  if (relleno){
+    void relleno.offsetWidth;
+    relleno.style.transition = 'width ' + DURACION + 'ms linear';
+    relleno.style.width = '100%';
+  }
+}
+
+function autoplay(){
+  clearInterval(timerHero);
+  if (laminas.length < 2) return;
+  timerHero = setInterval(() => {
+    if (document.hidden || vista !== 'inicio') return;
+    pintarLamina(laminaActual + 1);
+  }, DURACION);
+}
+
+function pausarHero(){
+  clearInterval(timerHero);
+  $$('#hero-pista video').forEach(v => v.pause());
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) pausarHero();
+  else if (vista === 'inicio' && laminas.length){ autoplay(); pintarLamina(laminaActual); }
+});
+
+/* ===================================================================
+   Ficha
+   =================================================================== */
+function ficha(p){
+  const ago = agotado(p);
+  const s   = stockDe(p);
+  const uno = valido(p.foto) ? esc(p.foto) : PLACEHOLDER;
+  const dos = valido(p.foto_secundaria) ? esc(p.foto_secundaria) : '';
+
+  let marcaStock = '';
+  if (ago) marcaStock = '<span class="marca-stock cero">Sin stock</span>';
+  else if (s !== null && s <= 5) marcaStock = '<span class="marca-stock poco">Últimas ' + s + '</span>';
+
+  return '<article class="ficha' + (ago ? ' agotada' : '') + '" data-revelar>' +
+    '<button class="ficha-media" data-accion="ver" data-id="' + esc(p.id) + '" aria-label="Ver ' + esc(p.nombre) + '">' +
+      marcaStock +
+      '<img src="' + uno + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="principal' + (dos ? ' tiene-alterna' : '') + giro(p,'foto') + '">' +
+      (dos ? '<img src="' + dos + '" alt="" loading="lazy" decoding="async" class="alterna' + giro(p,'foto_secundaria') + '">' : '') +
+    '</button>' +
+    '<div class="ficha-texto">' +
+      '<span class="cejilla">' + esc(marcaDe(p)) + '</span>' +
+      '<h3 class="ficha-nombre">' + esc(p.nombre) + '</h3>' +
+      '<div class="filete filete-corto"></div>' +
+      '<span class="ficha-precio">' + precio(p.precio) + '</span>' +
+      (ago ? '<span class="ficha-encargo">Por encargo</span>' : '') +
+      '<button class="sello' + (ago ? ' reservar' : '') + '" data-accion="agregar" data-id="' + esc(p.id) + '">' + (ago ? 'Reservar' : 'Añadir') + '</button>' +
+    '</div>' +
+  '</article>';
+}
+
+const dispPrimero = lista => lista.slice().sort((a,b) => (agotado(a)?1:0) - (agotado(b)?1:0));
+
+/* ===================================================================
+   Marcas
+   =================================================================== */
+function montarMarcas(){
+  tiras.forEach(t => {
+    clearInterval(t.timer);
+    observadorTiras.unobserve(t.el);
+    const fila = t.el.closest('.marca-fila');
+    if (fila) observadorFilas.unobserve(fila);
+  });
+  tiras.length = 0;
+
+  $('#indice-marcas').innerHTML = marcas.map(m =>
+    '<button data-accion="ir-marca" data-marca="' + esc(m.nombre) + '">' + esc(m.nombre) + '</button>'
+  ).join('');
+
+  $('#lista-marcas').innerHTML = marcas.map((m,i) => {
+    const conFoto = m.items.filter(p => valido(p.foto));
+    const sinFoto = m.items.filter(p => !valido(p.foto));
+    const ordenados = dispPrimero([...conFoto, ...sinFoto]);
+    m.orden = ordenados;
+
+    const conStock = m.items.filter(p => !agotado(p)).length;
+    const resumen = conStock < m.items.length
+      ? plural(m.items.length,'referencia','referencias') + ' · ' + conStock + ' con stock'
+      : plural(m.items.length,'referencia','referencias');
+
+    const sello = valido(m.logo)
+      ? '<img src="' + esc(m.logo) + '" alt="" loading="lazy" decoding="async">'
+      : '<span>' + esc(m.nombre.slice(0,3)) + '</span>';
+
+    return '<section class="marca-fila" id="marca-' + esc(slug(m.nombre)) + '" data-revelar>' +
+      '<button class="marca-cabeza" data-accion="marca" data-marca="' + esc(m.nombre) + '">' +
+        '<span class="marca-sello">' + sello + '</span>' +
+        '<span class="marca-datos">' +
+          '<span class="cejilla">' + esc(resumen) + '</span>' +
+          '<span class="display" style="display:block;font-size:clamp(1.4rem,4.6vw,2.6rem);letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(m.nombre) + '</span>' +
+          '<span class="marca-enlace">' +
+            '<span class="filete"></span>' +
+            '<em>Ver la colección</em>' +
+            '<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l7 7-7 7M3 12h18"/></svg>' +
+          '</span>' +
+        '</span>' +
+      '</button>' +
+      '<div class="tira sin-barra" data-tira="' + i + '"></div>' +
+      '<div class="tira-barra"><i data-tira-barra="' + i + '"></i></div>' +
+    '</section>';
+  }).join('');
+
+  marcas.forEach((_,i) => {
+    const el = $('[data-tira="' + i + '"]');
+    if (!el) return;
+    observadorTiras.observe(el);
+    if (el.closest('.marca-fila')) observadorFilas.observe(el.closest('.marca-fila'));
+
+    const barra = $('[data-tira-barra="' + i + '"]');
+    let tick = false;
+    el.addEventListener('scroll', () => {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(() => {
+        const max = el.scrollWidth - el.clientWidth;
+        if (barra) barra.style.width = (max > 0 ? (el.scrollLeft / max) * 100 : 0) + '%';
+        tick = false;
+      });
+    }, { passive:true });
+
+    let avance = 0;
+    const timer = setInterval(() => {
+      if (!el.visible || document.hidden || vista !== 'inicio' || el.matches(':hover')) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
+      avance += el.clientWidth * .8;
+      if (avance > max) avance = 0;
+      el.scrollTo({ left: avance, behavior:'smooth' });
+    }, 5200);
+
+    el.addEventListener('pointerdown', () => { avance = el.scrollLeft; }, { passive:true });
+    tiras.push({ el, timer });
+  });
+
+  revelar($('#lista-marcas'));
+}
+
+/* ===================================================================
+   Listado
+   =================================================================== */
+function baseLista(){
+  if (textoBusqueda){
+    const q = limpiar(textoBusqueda);
+    return productos.filter(p =>
+      limpiar(p.nombre).includes(q) || limpiar(p.marca).includes(q) || limpiar(p.cod).includes(q)
+    );
+  }
+  if (marcaActual) return productos.filter(p => marcaDe(p) === marcaActual);
+  return productos;
+}
+
+function ordenar(lista){
+  const l = lista.slice();
+  if (orden === 'precio-asc')  return l.sort((a,b) => (Number(a.precio)||0) - (Number(b.precio)||0));
+  if (orden === 'precio-desc') return l.sort((a,b) => (Number(b.precio)||0) - (Number(a.precio)||0));
+  if (orden === 'nombre')      return l.sort((a,b) => String(a.nombre).localeCompare(String(b.nombre),'es'));
+  return dispPrimero(l);
+}
+
+const LOTE = 24;
+let listaActual = [], pintadas = 0;
+
+/* Se dibujan 24 fichas y el resto entra al acercarse al final:
+   una marca con 300 referencias ya no bloquea el hilo al abrirse. */
+function agregarLote(){
+  const cont = $('#rejilla-productos');
+  const trozo = listaActual.slice(pintadas, pintadas + LOTE);
+  if (trozo.length){
+    cont.insertAdjacentHTML('beforeend', trozo.map(ficha).join(''));
+    pintadas += trozo.length;
+    revelar(cont);
+  }
+  $('#centinela').classList.toggle('oculto', pintadas >= listaActual.length);
+}
+
+const observadorCentinela = new IntersectionObserver(entradas => {
+  if (entradas.some(e => e.isIntersecting)) agregarLote();
+}, { rootMargin:'700px' });
+
+function pintarLista(){
+  const base     = baseLista();
+  const agotados = base.filter(agotado).length;
+  const visibles = ordenar(soloStock ? base.filter(p => !agotado(p)) : base);
+
+  $('#lista-cejilla').textContent = textoBusqueda ? 'Resultados' : (marcaActual ? 'La marca' : 'Colección');
+  $('#lista-titulo').textContent  = textoBusqueda ? '“' + textoBusqueda + '”' : (marcaActual || 'Todo el catálogo');
+  $('#control-stock').setAttribute('aria-pressed', String(soloStock));
+  $('#control-stock').textContent = soloStock ? 'Mostrando solo con stock' : 'Solo con stock';
+
+  const cont = $('#rejilla-productos');
+
+  listaActual = visibles;
+  pintadas = 0;
+  cont.innerHTML = '';
+
+  if (!visibles.length){
+    $('#lista-conteo').textContent = '';
+    $('#centinela').classList.add('oculto');
+    cont.innerHTML = '<div class="vacio"><span class="cejilla cejilla-vino">Sin coincidencias</span>' +
+      '<h3 class="display">No encontramos ese producto</h3><p>' +
+      (soloStock && agotados ? 'Hay resultados, pero todos están sin stock. Desactiva el filtro para verlos y reservarlos.' : 'Prueba con el nombre de la marca o con menos palabras.') +
+      '</p><button class="btn" data-accion="inicio">Ver todas las marcas</button></div>';
+    return;
+  }
+
+  $('#lista-conteo').textContent = (agotados && !soloStock)
+    ? plural(visibles.length,'referencia','referencias') + ' · ' + agotados + ' sin stock (se pueden reservar)'
+    : plural(visibles.length,'referencia disponible','referencias disponibles');
+
+  agregarLote();
+}
+
+/* ===================================================================
+   Detalle
+   =================================================================== */
+function verProducto(id){
+  const p = porId.get(String(id));
+  if (!p) return;
+
+  if (vista !== 'detalle') scrollGuardado = window.scrollY;
+  detalle = p;
+  cantidadDetalle = 1;
+
+  const ago = agotado(p);
+  const s   = stockDe(p);
+
+  $('#d-marca').textContent    = marcaDe(p);
+  $('#d-nombre').textContent   = p.nombre;
+  $('#d-ref').textContent      = valido(p.cod) ? 'Ref. ' + p.cod : '';
+  $('#d-precio').textContent   = precio(p.precio) + ' USD';
+  $('#d-cantidad').textContent = '1';
+  $('#miga-marca').textContent = marcaDe(p);
+  $('#miga-producto').textContent = p.nombre;
+  $('#d-descripcion').textContent = valido(p.descripcion_larga)
+    ? p.descripcion_larga
+    : 'Producto original de nuestra selección. Escríbenos si quieres más detalles sobre presentación, contenido o modo de uso.';
+
+  const estado = $('#d-estado');
+  estado.className = 'info-estado' + (ago ? ' cero' : (s !== null && s <= 5 ? ' poco' : ''));
+  estado.textContent = ago ? 'Sin stock' : (s !== null && s <= 5 ? 'Últimas ' + s : 'Disponible');
+
+  $('#d-encargo').classList.toggle('oculto', !ago);
+
+  const boton = $('#d-agregar');
+  boton.textContent = ago ? 'Reservar producto' : 'Añadir a la cesta';
+  boton.className = 'btn btn-ancho' + (ago ? ' btn-moka' : '');
+
+  $('#volver-texto').textContent = marcaActual ? 'Volver a ' + marcaActual
+    : (textoBusqueda ? 'Volver a los resultados' : 'Volver al catálogo');
+
+  medios = [];
+  const vistos = new Set();
+  CAMPOS_FOTO.forEach(k => { if (valido(p[k]) && !vistos.has(p[k])){ vistos.add(p[k]); medios.push({ tipo:'img', url:p[k].trim(), campo:k }); } });
+  CAMPOS_VIDEO.forEach(k => { if (valido(p[k]) && !vistos.has(p[k])){ vistos.add(p[k]); medios.push({ tipo:'video', url:p[k].trim(), campo:k }); } });
+
+  $('#miniaturas').innerHTML = medios.map((m,i) =>
+    '<button class="mini" data-accion="medio" data-i="' + i + '"' + (i ? '' : ' aria-current="true"') + ' aria-label="Vista ' + (i+1) + '">' +
+      (m.tipo === 'img'
+        ? '<img src="' + esc(m.url) + '" alt="" loading="lazy" decoding="async" class="' + giro(p,m.campo).trim() + '">'
+        : '<span class="vid"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/></svg><em>Video</em></span>') +
+    '</button>'
+  ).join('');
+
+  if (medios.length) verMedio(0);
+  else { $('#lienzo-img').src = PLACEHOLDER; $('#lienzo').classList.remove('cargando'); }
+
+  const primer = $('.plegable');
+  primer.setAttribute('data-abierto','true');
+  const cuerpo = $('.plegable-cuerpo', primer);
+  cuerpo.style.height = 'auto';
+  requestAnimationFrame(() => { cuerpo.style.height = cuerpo.scrollHeight + 'px'; });
+  $$('.plegable').slice(1).forEach(pl => {
+    pl.setAttribute('data-abierto','false');
+    $('.plegable-cuerpo', pl).style.height = '0px';
+  });
+
+  const mismos = productos.filter(x => marcaDe(x) === marcaDe(p) && String(x.id) !== String(p.id));
+  const elegidos = dispPrimero(mismos.slice().sort(() => .5 - Math.random()).slice(0,8)).slice(0,4);
+  $('#similares-bloque').classList.toggle('oculto', !elegidos.length);
+  if (elegidos.length){
+    $('#similares').innerHTML = elegidos.map(ficha).join('');
+    revelar($('#similares'));
+  }
+
+  empujar({ vista:'detalle', id:String(p.id), marca:marcaActual, busqueda:textoBusqueda });
+  cambiarVista('detalle');
+  window.scrollTo(0,0);
+}
+
+function verMedio(i){
+  const m = medios[i];
+  if (!m) return;
+
+  $$('#miniaturas .mini').forEach((t,n) => n === i ? t.setAttribute('aria-current','true') : t.removeAttribute('aria-current'));
+
+  const img = $('#lienzo-img'), vid = $('#lienzo-video'), lienzo = $('#lienzo');
+
+  if (m.tipo === 'img'){
+    vid.pause(); vid.classList.add('oculto'); vid.removeAttribute('src');
+    img.classList.remove('oculto');
+    img.className = giro(detalle, m.campo).trim();
+    lienzo.classList.toggle('rotada', /gira-/.test(img.className));
+    lienzo.classList.add('cargando');
+    img.onload  = () => lienzo.classList.remove('cargando');
+    img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER; lienzo.classList.remove('cargando'); };
+    img.src = m.url;
+    img.alt = detalle ? detalle.nombre : '';
+    if (img.complete && img.naturalWidth) lienzo.classList.remove('cargando');
+  } else {
+    img.classList.add('oculto');
+    lienzo.classList.remove('rotada','cargando');
+    vid.classList.remove('oculto');
+    if (detalle && valido(detalle.foto)) vid.poster = detalle.foto.trim();
+    vid.src = m.url;
+    vid.load();
+    vid.play().catch(()=>{});
+  }
+}
+
+(function zoom(){
+  const lienzo = $('#lienzo'), img = $('#lienzo-img');
+  if (!lienzo || !window.matchMedia('(hover:hover)').matches) return;
+  lienzo.addEventListener('mousemove', e => {
+    if (img.classList.contains('oculto') || /gira-/.test(img.className)) return;
+    const r = lienzo.getBoundingClientRect();
+    img.style.transformOrigin = ((e.clientX-r.left)/r.width*100) + '% ' + ((e.clientY-r.top)/r.height*100) + '%';
+    lienzo.classList.add('zoom');
+  });
+  lienzo.addEventListener('mouseleave', () => { lienzo.classList.remove('zoom'); img.style.transformOrigin=''; });
+})();
+
+/* ===================================================================
+   Vistas e historial
+   =================================================================== */
+function cambiarVista(v){
+  vista = v;
+  $('#vista-inicio').classList.toggle('oculto', v !== 'inicio');
+  $('#vista-lista').classList.toggle('oculto', v !== 'lista');
+  $('#vista-detalle').classList.toggle('oculto', v !== 'detalle');
+
+  if (v === 'inicio'){ if (laminas.length){ autoplay(); pintarLamina(laminaActual); } }
+  else pausarHero();
+
+  if (v !== 'detalle'){ const vd = $('#lienzo-video'); if (vd) vd.pause(); }
+}
+
+function empujar(estado){
+  if (restaurando) return;
+  try {
+    history.replaceState(Object.assign({}, history.state || {}, { scroll: window.scrollY }), '');
+    history.pushState(estado, '');
+  } catch(_){}
+}
+
+function irInicio(){
+  marcaActual = ''; textoBusqueda = ''; soloStock = false;
+  $('#busqueda').value = ''; $('#busqueda-movil').value = '';
+  $('#buscador-movil').classList.remove('abierto');
+  if (vista !== 'inicio') empujar({ vista:'inicio' });   // no apila estados repetidos
+  cambiarVista('inicio');
+  window.scrollTo(0,0);
+}
+
+function irLista(marca, busqueda){
+  marcaActual = marca || '';
+  textoBusqueda = busqueda || '';
+  soloStock = false;
+  empujar({ vista:'lista', marca:marcaActual, busqueda:textoBusqueda });
+  pintarLista();
+  cambiarVista('lista');
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('popstate', e => {
+  const st = e.state || { vista:'inicio' };
+  restaurando = true;
+  try {
+    if (st.vista === 'detalle'){
+      marcaActual = st.marca || ''; textoBusqueda = st.busqueda || '';
+      verProducto(st.id);
+    } else if (st.vista === 'lista'){
+      marcaActual = st.marca || ''; textoBusqueda = st.busqueda || '';
+      $('#busqueda').value = textoBusqueda; $('#busqueda-movil').value = textoBusqueda;
+      pintarLista(); cambiarVista('lista');
+      window.scrollTo(0, st.scroll || 0);
+    } else {
+      marcaActual = ''; textoBusqueda = '';
+      $('#busqueda').value = ''; $('#busqueda-movil').value = '';
+      cambiarVista('inicio');
+      window.scrollTo(0, st.scroll || 0);
+    }
+  } finally { restaurando = false; }
+});
+
+/* ===================================================================
+   Cesta — se guardan id y cantidad; precio y stock salen del catálogo vivo
+   =================================================================== */
+function leerCesta(){
+  try {
+    const g = JSON.parse(localStorage.getItem(CLAVE_CESTA) || '[]');
+    cesta = Array.isArray(g) ? g.filter(x => x && x.id).map(x => ({ id:String(x.id), qty:Math.max(1, parseInt(x.qty,10)||1) })) : [];
+  } catch(_){ cesta = []; }
+}
+function guardarCesta(){ try { localStorage.setItem(CLAVE_CESTA, JSON.stringify(cesta)); } catch(_){} }
+
+function lineas(){
+  return cesta.map(l => {
+    const p = porId.get(l.id);
+    return p ? { p, qty:l.qty, encargo:agotado(p), importe:(Number(p.precio)||0)*l.qty } : null;
+  }).filter(Boolean);
+}
+
+function agregar(id, cantidad, confirmado){
+  const p = porId.get(String(id));
+  if (!p) return;
+
+  if (agotado(p) && !confirmado){
+    reservaPendiente = { id:String(id), cantidad:Math.max(1, parseInt(cantidad,10)||1) };
+    $('#reserva-nombre').textContent = p.nombre;
+    $('#modal-reserva').classList.add('abierto');
+    return;
+  }
+
+  const qty = Math.max(1, parseInt(cantidad,10)||1);
+  const ya = cesta.find(l => l.id === String(id));
+  if (ya) ya.qty += qty; else cesta.push({ id:String(id), qty });
+
+  guardarCesta();
+  pintarCesta();
+
+  const c = $('#contador');
+  c.classList.add('late');
+  setTimeout(() => c.classList.remove('late'), 300);
+
+  if (agotado(p)) aviso(p.nombre + ' · reservado (sin stock)', 'encargo');
+  else aviso(p.nombre + ' · añadido a la cesta');
+}
+
+function cambiarQty(id, delta){
+  const l = cesta.find(x => x.id === String(id));
+  if (!l) return;
+  l.qty += delta;
+  if (l.qty <= 0) cesta = cesta.filter(x => x.id !== String(id));
+  guardarCesta();
+  pintarCesta();
+}
+
+function quitar(id){
+  cesta = cesta.filter(x => x.id !== String(id));
+  guardarCesta();
+  pintarCesta();
+  aviso('Producto retirado de la cesta');
+}
+
+function pintarCesta(){
+  const ls = lineas();
+  const unidades = ls.reduce((a,l) => a + l.qty, 0);
+  $('#contador').textContent = unidades;
+  $('#contador-texto').textContent = unidades;
+
+  const cuerpo = $('#cesta-cuerpo');
+
+  if (!ls.length){
+    cuerpo.innerHTML =
+      '<div class="vacio" style="border:0;padding-block:clamp(3rem,14vh,5rem)">' +
+        '<h3 class="display">Tu cesta está vacía</h3>' +
+        '<p>Explora las marcas y añade lo que quieras pedir.</p>' +
+        '<button class="btn btn-linea" data-accion="cerrar-cesta">Seguir viendo el catálogo</button>' +
+      '</div>';
+    $('#desglose').innerHTML = '';
+    $('#desglose-2').innerHTML = '';
+    volverResumen();
+    return;
+  }
+
+  cuerpo.innerHTML = ls.map(l =>
+    '<div class="linea-cesta">' +
+      '<div class="linea-media' + (l.encargo ? ' encargo' : '') + '">' +
+        '<img src="' + (valido(l.p.foto) ? esc(l.p.foto) : PLACEHOLDER) + '" alt="" loading="lazy" class="' + giro(l.p,'foto').trim() + '">' +
+      '</div>' +
+      '<div class="linea-datos">' +
+        '<span class="cejilla">' + esc(marcaDe(l.p)) + '</span>' +
+        '<h4>' + esc(l.p.nombre) + '</h4>' +
+        (l.encargo ? '<span class="pastilla">Por encargo · sin stock</span>' : '') +
+        '<div class="linea-fila">' +
+          '<span class="paso-mini">' +
+            '<button data-accion="menos" data-id="' + esc(l.p.id) + '" aria-label="Quitar una unidad">−</button>' +
+            '<span>' + l.qty + '</span>' +
+            '<button data-accion="mas" data-id="' + esc(l.p.id) + '" aria-label="Añadir una unidad">+</button>' +
+          '</span>' +
+          '<span class="linea-importe">' + precio(l.importe) + '</span>' +
+        '</div>' +
+        '<button class="quitar" data-accion="quitar" data-id="' + esc(l.p.id) + '">Quitar</button>' +
+      '</div>' +
+    '</div>'
+  ).join('');
+
+  const enc  = ls.filter(l => l.encargo);
+  const disp = ls.filter(l => !l.encargo);
+  const suma = arr => arr.reduce((a,l) => a + l.importe, 0);
+  const uEnc = enc.reduce((a,l) => a + l.qty, 0);
+
+  const html =
+    (enc.length
+      ? '<div><span>Disponible ahora</span><span>' + precio(suma(disp)) + '</span></div>' +
+        '<div class="encargo"><span>Por encargo (' + plural(uEnc,'unidad','unidades') + ')</span><span>' + precio(suma(enc)) + '</span></div>'
+      : '') +
+    '<div class="total"><span>Total</span><b>' + precio(suma(ls)) + '</b></div>';
+
+  $('#desglose').innerHTML = html;
+  $('#desglose-2').innerHTML = html;
+
+  $('#form-encargo').classList.toggle('oculto', !enc.length);
+  if (enc.length){
+    $('#form-encargo-texto').textContent =
+      'Tu pedido incluye ' + plural(uEnc,'unidad','unidades') +
+      ' sin stock. Te confirmamos por WhatsApp la fecha de llegada antes de cobrar esa parte.';
+  }
+}
+
+function abrirCesta(){ $('#telon-cesta').classList.add('abierto'); document.body.style.overflow = 'hidden'; }
+function cerrarCesta(){ $('#telon-cesta').classList.remove('abierto'); document.body.style.overflow = ''; }
+function volverResumen(){ $('#cesta-resumen').classList.remove('oculto'); $('#cesta-datos').classList.add('oculto'); }
+
+function irDatos(){
+  if (!lineas().length){ aviso('Añade al menos un producto para continuar'); return; }
+  $('#cesta-resumen').classList.add('oculto');
+  $('#cesta-datos').classList.remove('oculto');
+  $('#c-nombre').focus();
+}
+
+function enviarPedido(){
+  const nombre = $('#c-nombre').value.trim();
+  const cedula = $('#c-cedula').value.trim();
+  const tel    = $('#c-telefono').value.trim();
+  const envio  = $('#c-envio').value;
+  const dir    = $('#c-direccion').value.trim();
+  const pago   = $('#c-pago').value;
+
+  const faltan = [];
+  if (!nombre) faltan.push('nombre');
+  if (!cedula) faltan.push('cédula');
+  if (!tel)    faltan.push('teléfono');
+  if (!envio)  faltan.push('método de entrega');
+  if (!dir)    faltan.push('dirección');
+  if (faltan.length){ aviso('Falta completar: ' + faltan.join(', ')); return; }
+
+  const ls = lineas();
+  if (!ls.length){ aviso('Tu cesta está vacía'); return; }
+
+  const disp = ls.filter(l => !l.encargo);
+  const enc  = ls.filter(l => l.encargo);
+  const suma = arr => arr.reduce((a,l) => a + l.importe, 0);
+  const fila = l => '• ' + l.qty + ' x ' + l.p.nombre + ' — ' + precio(l.p.precio);
+
+  let msg = '*NUEVO PEDIDO · ZONA GLAM SUPPLY*\n\n';
+  if (enc.length) msg += '⚠️ *ESTE PEDIDO INCLUYE ' + enc.length + ' PRODUCTO(S) POR ENCARGO (SIN STOCK)*\n\n';
+  msg += '*Cliente:* ' + nombre + '\n*Cédula:* ' + cedula + '\n*Teléfono:* ' + tel +
+         '\n*Entrega:* ' + envio + '\n*Dirección:* ' + dir + '\n*Pago:* ' + pago + '\n\n';
+  if (disp.length) msg += '*DISPONIBLES AHORA:*\n' + disp.map(fila).join('\n') + '\nSubtotal disponible: ' + precio(suma(disp)) + '\n\n';
+  if (enc.length)  msg += '*POR ENCARGO (sin stock):*\n' + enc.map(fila).join('\n') + '\nSubtotal por encargo: ' + precio(suma(enc)) + '\n\n';
+  msg += '*TOTAL:* ' + precio(suma(ls)) + ' USD';
+  if (enc.length) msg += '\n\n_El cliente sabe que los productos por encargo no están disponibles hoy._';
+
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+}
+
+function consultar(){
+  if (!detalle) return;
+  const ref = valido(detalle.cod) ? ' (REF ' + detalle.cod + ')' : '';
+  const msg = agotado(detalle)
+    ? 'Hola Zona Glam, quiero reservar *' + detalle.nombre + '*' + ref + ' — aparece sin stock. ¿Cuándo llega?'
+    : 'Hola Zona Glam, quiero información sobre *' + detalle.nombre + '*' + ref + ' — ' + precio(detalle.precio);
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+}
+
+/* ===================================================================
+   Un solo escuchador de clics para toda la página
+   =================================================================== */
+document.addEventListener('click', e => {
+  const telon = e.target.closest('[data-telon]');
+  if (telon && e.target === telon){
+    telon.classList.remove('abierto');
+    if (telon.id === 'telon-cesta') document.body.style.overflow = '';
+    if (telon.id === 'modal-reserva') reservaPendiente = null;
+    return;
+  }
+
+  const el = e.target.closest('[data-accion]');
+  if (!el) return;
+
+  switch(el.dataset.accion){
+    case 'inicio':   irInicio(); break;
+    case 'recargar': location.reload(); break;
+    case 'arriba':   window.scrollTo({ top:0, behavior:'smooth' }); break;
+    case 'marca':    irLista(el.dataset.marca, ''); break;
+    case 'ver':      verProducto(el.dataset.id); break;
+    case 'agregar':  agregar(el.dataset.id, 1); break;
+
+    case 'ir-marca': {
+      const destino = document.getElementById('marca-' + slug(el.dataset.marca));
+      if (destino) destino.scrollIntoView({ behavior:'smooth', block:'start' });
+      break;
+    }
+
+    case 'lupa': {
+      const caja = $('#buscador-movil');
+      caja.classList.toggle('abierto');
+      if (caja.classList.contains('abierto')) $('#busqueda-movil').focus();
+      break;
+    }
+
+    case 'solo-stock': soloStock = !soloStock; pintarLista(); break;
+
+    case 'volver':
+      if (history.state && history.state.vista === 'detalle') history.back();
+      else if (marcaActual || textoBusqueda){ pintarLista(); cambiarVista('lista'); window.scrollTo(0, scrollGuardado); }
+      else irInicio();
+      break;
+
+    case 'volver-marca':
+      // La miga dice el nombre de la marca del producto: que lleve ahí.
+      if (detalle) irLista(marcaDe(detalle), '');
+      else irInicio();
+      break;
+
+    case 'cantidad':
+      cantidadDetalle = Math.max(1, cantidadDetalle + Number(el.dataset.delta));
+      $('#d-cantidad').textContent = cantidadDetalle;
+      break;
+    case 'agregar-detalle': if (detalle) agregar(detalle.id, cantidadDetalle); break;
+    case 'consultar': consultar(); break;
+    case 'medio': verMedio(Number(el.dataset.i)); break;
+
+    case 'plegar': {
+      const caja = el.closest('.plegable');
+      const cuerpo = $('.plegable-cuerpo', caja);
+      const abierto = caja.getAttribute('data-abierto') === 'true';
+      caja.setAttribute('data-abierto', String(!abierto));
+      cuerpo.style.height = abierto ? '0px' : cuerpo.scrollHeight + 'px';
+      break;
+    }
+
+    case 'hero':    clearInterval(timerHero); pintarLamina(laminaActual + Number(el.dataset.dir)); autoplay(); break;
+    case 'hero-ir': clearInterval(timerHero); pintarLamina(Number(el.dataset.i)); autoplay(); break;
+
+    case 'abrir-cesta':  abrirCesta(); break;
+    case 'cerrar-cesta': cerrarCesta(); break;
+    case 'mas':    cambiarQty(el.dataset.id, 1); break;
+    case 'menos':  cambiarQty(el.dataset.id, -1); break;
+    case 'quitar': quitar(el.dataset.id); break;
+    case 'ir-datos': irDatos(); break;
+    case 'volver-resumen': volverResumen(); break;
+    case 'enviar-pedido': enviarPedido(); break;
+
+    case 'cancelar-reserva':
+      reservaPendiente = null;
+      $('#modal-reserva').classList.remove('abierto');
+      break;
+    case 'confirmar-reserva': {
+      const r = reservaPendiente;
+      reservaPendiente = null;
+      $('#modal-reserva').classList.remove('abierto');
+      if (r) agregar(r.id, r.cantidad, true);
+      break;
+    }
+  }
+});
+
+/* ===================================================================
+   Búsqueda
+   =================================================================== */
+function buscar(valor){
+  clearTimeout(timerBusqueda);
+  timerBusqueda = setTimeout(() => {
+    const q = valor.trim();
+    if (!q){ if (vista === 'lista' && textoBusqueda) irInicio(); return; }
+    if (vista === 'lista' && textoBusqueda){
+      textoBusqueda = q; marcaActual = '';
+      pintarLista();
+      try { history.replaceState({ vista:'lista', marca:'', busqueda:q }, ''); } catch(_){}
+    } else irLista('', q);
+  }, 260);
+}
+$('#busqueda').addEventListener('input', e => { $('#busqueda-movil').value = e.target.value; buscar(e.target.value); });
+$('#busqueda-movil').addEventListener('input', e => { $('#busqueda').value = e.target.value; buscar(e.target.value); });
+$('#control-orden').addEventListener('change', e => { orden = e.target.value; pintarLista(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    $('#modal-reserva').classList.remove('abierto');
+    reservaPendiente = null;
+    cerrarCesta();
+    return;
+  }
+  if (vista !== 'inicio' || laminas.length < 2) return;
+  if (e.key === 'ArrowRight'){ clearInterval(timerHero); pintarLamina(laminaActual+1); autoplay(); }
+  if (e.key === 'ArrowLeft'){  clearInterval(timerHero); pintarLamina(laminaActual-1); autoplay(); }
+});
+
+/* Una sola escritura al DOM por cuadro durante el scroll */
+let tickScroll = false;
+window.addEventListener('scroll', () => {
+  if (tickScroll) return;
+  tickScroll = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    $('#nav').classList.toggle('compacta', y > 24);
+    $('#arriba').classList.toggle('visible', y > 640);
+    const alto = document.documentElement.scrollHeight - window.innerHeight;
+    const barra = $('#riel-progreso');
+    if (barra) barra.style.height = (alto > 0 ? (y/alto)*100 : 0) + '%';
+    tickScroll = false;
+  });
+}, { passive:true });
+
+/* Un solo manejador de imágenes rotas, en captura */
+document.addEventListener('error', e => {
+  const t = e.target;
+  if (t && t.tagName === 'IMG' && t.src !== PLACEHOLDER && !t.dataset.roto){
+    t.dataset.roto = '1';
+    t.src = PLACEHOLDER;
+  }
+}, true);
+
+observadorCentinela.observe($('#centinela'));
+iniciar();
+})();
+</script>
+</body>
+</html>
