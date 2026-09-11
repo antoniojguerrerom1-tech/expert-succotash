@@ -81,14 +81,12 @@
   --t-cuerpo:clamp(13.5px,.95vw,14.5px);
   --t-titulo:clamp(1.35rem,3.4vw,2rem);
   --t-seccion:clamp(1.9rem,5.4vw,3.2rem);
-  --t-portada:clamp(2.3rem,7vw,5.2rem);
+  --t-portada:clamp(2rem,3.9vw,3.35rem);
 
   --gutter:clamp(1.15rem,4vw,3.2rem);
   --ancho:1320px;
-  --riel:0px;
   --alto-nav:64px;
 }
-@media (min-width:1280px){ :root{ --riel:48px } }
 
 *,*::before,*::after{box-sizing:border-box}
 html{
@@ -98,7 +96,7 @@ html{
 }
 @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
 body{
-  margin:0;padding-left:var(--riel);
+  margin:0;
   background:var(--papel);color:var(--tinta);
   font-family:'Jost',system-ui,-apple-system,sans-serif;
   font-size:15px;font-weight:300;line-height:1.6;
@@ -116,7 +114,7 @@ p,h1,h2,h3,h4{margin:0}
    El vino sobre papel rinde 7.24:1, así que solo hacía falta engrosarlo. */
 :focus-visible{outline:2px solid var(--vino);outline-offset:3px;border-radius:1px}
 /* Sobre el telón oscuro el vino se pierde: ahí manda el papel. */
-.hero :focus-visible,.cinta :focus-visible,.pie :focus-visible{outline-color:var(--papel)}
+.hero-oscuro :focus-visible,.pie :focus-visible{outline-color:var(--papel)}
 ::selection{background:var(--tinta);color:var(--papel)}
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-track{background:var(--nacar)}
@@ -161,37 +159,7 @@ body::before{
   opacity:.30;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
 }
-main,nav,footer,.riel,.cinta{position:relative;z-index:2}
-
-/* ==================== Riel lateral ==================== */
-.riel{
-  position:fixed;left:0;top:0;bottom:0;width:48px;z-index:40;
-  display:none;align-items:center;justify-content:center;
-  border-right:1px solid rgba(107,82,69,.18);
-  background:linear-gradient(180deg,var(--papel),var(--nacar));
-}
-@media (min-width:1280px){.riel{display:flex}}
-.riel span{
-  writing-mode:vertical-rl;text-orientation:mixed;
-  font-size:9.5px;letter-spacing:.46em;text-transform:uppercase;color:var(--moka);
-}
-.riel-progreso{position:absolute;right:-1px;top:0;width:2px;background:var(--moka);height:0}
-
-/* ==================== Cinta superior ====================
-   Texto en movimiento perpetuo sin forma de detenerlo: eso es justo lo que
-   prohíbe el criterio de contenido auto-animado. Ahora se detiene al pasar
-   por encima, al recibir foco de teclado y con reduced-motion. */
-.cinta{background:var(--tinta);color:var(--nacar);overflow:hidden;padding-block:9px;position:relative}
-/* Los extremos se desvanecen en vez de cortarse en seco. */
-.cinta::before,.cinta::after{
-  content:"";position:absolute;top:0;bottom:0;width:clamp(28px,6vw,72px);z-index:2;pointer-events:none;
-}
-.cinta::before{left:0;background:linear-gradient(90deg,var(--tinta),transparent)}
-.cinta::after{right:0;background:linear-gradient(270deg,var(--tinta),transparent)}
-.marquesina{display:flex;gap:3.5rem;width:max-content;animation:desliza 44s linear infinite}
-.cinta:hover .marquesina,.cinta:focus-within .marquesina{animation-play-state:paused}
-.marquesina span{white-space:nowrap;font-size:var(--t-cejilla);letter-spacing:.32em;text-transform:uppercase;color:var(--nacar-suave)}
-@keyframes desliza{to{transform:translateX(-50%)}}
+main,nav,footer{position:relative;z-index:2}
 
 /* ==================== Navegación ==================== */
 .nav{
@@ -202,6 +170,10 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
   border-bottom:1px solid var(--linea);
   transition:box-shadow .4s var(--ease);
 }
+/* El avance de lectura era una barra vertical pegada al margen izquierdo.
+   Ahora es un hilo en el borde inferior de la barra: se lee igual y no
+   ocupa una columna entera de la pantalla. */
+.nav-progreso{position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--moka);z-index:2}
 .nav.compacta{box-shadow:0 1px 0 rgba(20,17,26,.06),0 22px 44px -40px rgba(20,17,26,.55)}
 .nav-fila{
   max-width:var(--ancho);margin:0 auto;padding:1.05rem var(--gutter);
@@ -248,137 +220,145 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
   padding:.75rem .9rem;font-size:16px;outline:none;margin-block:.85rem;
 }
 
-/* ==================== Hero ==================== */
-.hero{position:relative;width:100%;height:clamp(520px,86svh,860px);background:var(--tinta);overflow:hidden}
-.hero-pista{position:absolute;inset:0}
-.hero-lamina{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--ease-suave);pointer-events:none}
-.hero-lamina.activa{opacity:1}
-/* La foto de respaldo va debajo del video: cubre la carga y el fallo. */
-.hero-lamina img,.hero-lamina video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-lamina .hero-poster{z-index:0}
-.hero-lamina video{z-index:1;background:transparent}
-/* Antes: 1.02 → 1.13 en 13s. Un 11% de recorrido se percibe como zoom.
-   La deriva de una portada se nota sin verse: 6% y el doble de tiempo. */
-.hero-lamina.activa img.kenburns{animation:kenburns 26s var(--ease-suave) forwards}
-@keyframes kenburns{from{transform:scale(1.015) translate3d(0,0,0)}to{transform:scale(1.075) translate3d(-1.2%,-.8%,0)}}
-
-/* El velo anterior subía al 55%, caía al 6% y volvía a subir: esa banda
-   clara a media altura era lo que deslucía el titular. Ahora es una sola
-   caída continua, más profunda abajo, donde va la ficha del producto. */
-.hero-velo{
-  position:absolute;inset:0;z-index:5;pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(20,17,26,.62) 0%,rgba(20,17,26,.34) 26%,rgba(20,17,26,.22) 48%,rgba(20,17,26,.58) 74%,rgba(20,17,26,.88) 100%),
-    radial-gradient(120% 80% at 50% 0%,transparent 40%,rgba(20,17,26,.3) 100%);
+/* ==================== Hero ====================
+   Antes: la foto del producto se estiraba a sangre completa detrás del
+   titular. Una botella vertical recortada a 16:9 no puede verse bien, y el
+   texto de la etiqueta chocaba con el de la página. Ahora el hero es una
+   composición sobre papel: la palabra a un lado, el producto al otro,
+   contenido y entero. Nada se recorta y nada se pisa. */
+.hero{
+  position:relative;width:100%;
+  display:grid;align-items:center;
+  gap:clamp(1.8rem,5vw,4.5rem);
+  max-width:var(--ancho);margin-inline:auto;
+  padding:clamp(1.6rem,4vw,2.8rem) var(--gutter) clamp(1.8rem,4vw,2.6rem);
 }
-/* Grano finísimo sobre la foto: quita el aspecto de banner y acerca la
-   imagen al papel impreso del resto de la página. */
-.hero-velo::after{
-  content:"";position:absolute;inset:0;opacity:.24;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+@media (min-width:940px){
+  .hero{grid-template-columns:1fr .92fr}
 }
 
-.hero-texto{
-  position:absolute;z-index:7;inset-inline:0;top:clamp(3rem,9vh,6rem);
-  padding-inline:calc(var(--gutter) + 1rem);text-align:center;pointer-events:none;
-}
-.hero-texto .cejilla{color:var(--champan);display:block;margin-bottom:1.4rem}
+/* ---- Columna de palabra ---- */
+.hero-texto{position:relative;z-index:2;max-width:34rem}
+.hero-texto .cejilla{color:var(--champan-tinta);display:block;margin-bottom:1.5rem}
+/* El marcado declara dos líneas y cada una se recorta a sí misma para la
+   cortinilla. Con nowrap la primera excedía la columna y el overflow se
+   comía la coma final: el tamaño tiene que caber, no la línea forzarse. */
 .hero-texto h2{
-  color:var(--papel);font-size:var(--t-portada);letter-spacing:.015em;
-  max-width:15ch;margin-inline:auto;
+  font-size:var(--t-portada);letter-spacing:.01em;line-height:1.06;
+  max-width:none;text-wrap:balance;
 }
-.hero-texto .filete{max-width:120px;margin:1.9rem auto 0;opacity:.85}
+.hero-texto .filete{max-width:96px;margin:2rem 0 0}
+@media (max-width:939px){
+  .hero-texto{max-width:none;text-align:center}
+  .hero-texto h2{max-width:16ch;margin-inline:auto}
+  .hero-texto .filete{margin-inline:auto}
+}
 
-/* Entrada por cortinilla: cada línea sube desde detrás de su propio borde,
-   como un cartel que se descubre. Es el gesto que da el golpe de entrada
-   sin recurrir a nada que parezca una animación de plantilla. */
+/* Entrada por cortinilla: cada línea sube desde detrás de su propio borde. */
 .telon-linea{display:block;overflow:hidden}
 .telon-linea>*{display:block;transform:translateY(105%);opacity:0}
 .hero.entrada .telon-linea>*{
   transform:none;opacity:1;
-  transition:transform 1.15s var(--ease-entra),opacity .9s var(--ease-entra);
+  transition:transform .95s var(--ease-entra),opacity .7s var(--ease-entra);
 }
-.hero.entrada .l-1>*{transition-delay:.15s}
-.hero.entrada .l-2>*{transition-delay:.32s}
-.hero.entrada .l-3>*{transition-delay:.5s}
+.hero.entrada .l-1>*{transition-delay:.08s}
+.hero.entrada .l-2>*{transition-delay:.2s}
+.hero.entrada .l-3>*{transition-delay:.32s}
 
-/* Invitación a bajar: una línea que respira, no una flecha que rebota. */
-.hero-bajar{
-  position:absolute;z-index:7;left:50%;transform:translateX(-50%);
-  bottom:clamp(1.2rem,3vw,1.8rem);
-  display:none;flex-direction:column;align-items:center;gap:.75rem;
-  color:var(--nacar-tenue);font-size:9px;letter-spacing:.34em;text-transform:uppercase;
-  transition:color var(--t-medio) var(--ease);
+/* ---- Columna de producto ----
+   Un campo de nácar con mucho margen interior. El producto se apoya dentro,
+   completo; el campo es lo que da la medida constante, no el recorte. */
+.hero-vitrina{
+  position:relative;z-index:1;
+  aspect-ratio:1/1;max-height:min(50svh,430px);
+  margin-inline:auto;width:100%;
+  background:var(--blanco);
+  overflow:hidden;
 }
-@media (min-width:980px){.hero-bajar{display:flex}}
-.hero-bajar:hover{color:var(--papel)}
-.hero-bajar i{display:block;width:1px;height:46px;background:linear-gradient(180deg,transparent,var(--champan));overflow:hidden}
-.hero-bajar i::after{content:"";display:block;width:1px;height:46px;background:var(--papel);animation:cae 2.6s var(--ease-suave) infinite}
-@keyframes cae{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+@media (min-width:940px){ .hero-vitrina{aspect-ratio:4/5} }
+/* Un solo filete de contorno. Con el campo blanco sobre el papel ya hay
+   separación suficiente; un marco interior añadía un tercer borde. */
+.hero-vitrina{box-shadow:0 0 0 1px var(--linea)}
+.hero-pista{position:absolute;inset:0}
+.hero-lamina{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 1.1s var(--ease-suave);pointer-events:none;
+}
+.hero-lamina.activa{opacity:1}
+/* El producto entero, con aire alrededor. Las láminas editoriales del
+   administrador sí llenan el campo: se marcan con .panoramica. */
+.hero-lamina img,.hero-lamina video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;padding:clamp(20px,3.2vw,40px);
+}
+.hero-lamina.panoramica img,.hero-lamina.panoramica video{object-fit:cover;padding:0}
+.hero-lamina .hero-poster{z-index:0}
+.hero-lamina video{z-index:1;background:transparent}
+/* Deriva mínima, solo en las editoriales: sobre un producto contenido el
+   zoom se nota como un defecto. */
+.hero-lamina.panoramica.activa img.kenburns{animation:kenburns 26s var(--ease-suave) forwards}
+@keyframes kenburns{from{transform:scale(1.01)}to{transform:scale(1.07)}}
 
+/* ---- Ficha del destacado, bajo la vitrina ---- */
 .hero-pie{
-  position:absolute;z-index:7;left:0;right:0;bottom:clamp(3.4rem,7vw,4.4rem);
-  padding-inline:calc(var(--gutter) + clamp(14px,2.2vw,28px));
-  display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;
+  grid-column:1/-1;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+  padding-top:clamp(1.2rem,3vw,1.8rem);
+  border-top:1px solid var(--linea);
 }
-.hero-producto{max-width:34ch;text-align:left;color:var(--papel)}
-.hero-producto .cejilla{color:var(--champan);display:block;margin-bottom:.6rem}
-.hero-producto h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(1.15rem,2.6vw,1.8rem);line-height:1.2;margin-bottom:1.1rem}
-.hero-contador{color:rgba(245,242,243,.6);font-size:10px;letter-spacing:.3em;display:none}
-@media (min-width:760px){.hero-contador{display:block}}
-.hero-contador b{color:var(--papel);font-weight:400}
+@media (min-width:940px){
+  .hero{grid-template-areas:'texto vitrina' 'pie pie'}
+  .hero-texto{grid-area:texto}
+  .hero-vitrina{grid-area:vitrina}
+  .hero-pie{grid-area:pie}
+}
+.hero-producto{min-width:0;flex:1}
+.hero-producto .cejilla{color:var(--champan-tinta);display:block;margin-bottom:.5rem}
+.hero-producto h3{
+  font-family:'Bodoni Moda',serif;font-weight:400;font-optical-sizing:auto;
+  font-size:clamp(1.15rem,2.6vw,1.75rem);line-height:1.2;
+}
+.hero-producto .btn{margin-top:1.1rem;min-height:46px}
+/* Lámina editorial sin producto: el pie se queda solo con los mandos. */
+.hero-pie.sin-ficha{border-top-color:transparent;justify-content:flex-end}
+.hero-pie.sin-ficha .hero-producto{display:none}
+@media (max-width:939px){
+  .hero-pie{justify-content:center;text-align:center}
+  .hero-producto{flex:0 0 100%}
+}
+
+/* ---- Controles: un solo grupo, a la derecha del pie ---- */
+.hero-mandos{display:flex;align-items:center;gap:1.2rem;flex-shrink:0}
+.hero-contador{color:var(--gris);font-size:var(--t-cejilla);letter-spacing:.3em;white-space:nowrap}
+.hero-contador b{color:var(--tinta);font-weight:400}
 
 .hero-flecha{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:8;
-  width:46px;height:46px;display:none;align-items:center;justify-content:center;
-  border:1px solid rgba(245,242,243,.32);color:rgba(245,242,243,.78);
-  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+  width:40px;height:40px;display:none;align-items:center;justify-content:center;
+  border:1px solid var(--linea-media);color:var(--gris);
+  transition:background var(--t-corto) var(--ease),color var(--t-corto) var(--ease),border-color var(--t-corto) var(--ease);
 }
-.hero-flecha:hover{background:var(--papel);color:var(--tinta);border-color:var(--papel)}
-.hero-flecha.izq{left:clamp(26px,3.4vw,46px)}
-.hero-flecha.der{right:clamp(26px,3.4vw,46px)}
-@media (min-width:860px){.hero-flecha{display:flex}}
+.hero-flecha:hover{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+@media (min-width:560px){.hero-flecha{display:flex}}
 
-/* El indicador medía 44×2 px reales de zona pulsable: por debajo del mínimo
-   de 24×24. El filete sigue midiendo 2px; lo que crece es el área invisible
-   que lo rodea, así que se ve igual y ahora se puede tocar. */
-/* Los indicadores se van al margen derecho, bajo el contador de láminas:
-   un solo grupo de control en una esquina, en vez de dos sistemas que se
-   estorbaban en el centro con la invitación a bajar. */
-.hero-indicadores{
-  position:absolute;z-index:8;bottom:clamp(1.4rem,3.2vw,2rem);
-  right:calc(var(--gutter) + clamp(14px,2.2vw,28px));
-  display:flex;align-items:center;gap:2px;
-}
-@media (max-width:759px){
-  .hero-indicadores{right:auto;left:50%;transform:translateX(-50%)}
-}
-.hero-indicadores button{
-  position:relative;width:52px;height:28px;display:flex;align-items:center;
-  background:none;
-}
+.hero-indicadores{display:flex;align-items:center;gap:2px}
+.hero-indicadores button{position:relative;width:34px;height:28px;display:flex;align-items:center}
 .hero-indicadores button::before{
-  content:"";position:absolute;inset-inline:4px;height:2px;
-  background:rgba(245,242,243,.26);transition:background var(--t-medio) var(--ease);
+  content:"";position:absolute;inset-inline:3px;height:1px;
+  background:var(--linea-media);transition:background var(--t-corto) var(--ease);
 }
-.hero-indicadores button:hover::before{background:rgba(245,242,243,.5)}
-.hero-indicadores i{
-  position:absolute;left:4px;right:auto;width:0;height:2px;
-  background:var(--papel);display:block;
-}
-/* Pausa: exigido para cualquier contenido que avanza solo. */
+.hero-indicadores button:hover::before{background:var(--gris)}
+.hero-indicadores i{position:absolute;left:3px;width:0;height:1px;background:var(--tinta);display:block}
+
 .hero-pausa{
-  position:relative;z-index:8;width:28px;height:28px;margin-left:.5rem;
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(245,242,243,.6);transition:color var(--t-medio) var(--ease);
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  color:var(--gris);transition:color var(--t-corto) var(--ease);
 }
-.hero-pausa:hover{color:var(--papel)}
-.hero-pausa svg{width:11px;height:11px;fill:currentColor;stroke:none}
+.hero-pausa:hover{color:var(--tinta)}
+.hero-pausa svg{width:10px;height:10px;fill:currentColor;stroke:none}
 .hero-pausa .icono-play{display:none}
 .hero-pausa[aria-pressed="true"] .icono-play{display:block}
 .hero-pausa[aria-pressed="true"] .icono-pausa{display:none}
-
-@media (max-width:759px){.hero-pie{justify-content:center}.hero-producto{text-align:center}}
 
 /* ==================== Beneficios ==================== */
 .beneficios{border-block:1px solid var(--linea);background:rgba(234,228,231,.42)}
@@ -403,19 +383,28 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
    barra, marca la marca en pantalla y se desplaza sola hasta ella. */
 .indice-cinta{
   position:sticky;top:var(--alto-nav);z-index:30;
-  margin-bottom:clamp(1rem,3vw,2rem);
-  background:linear-gradient(180deg,var(--papel) 72%,rgba(245,242,243,0));
-  padding-top:.9rem;
+  margin-bottom:clamp(1.4rem,3.4vw,2.2rem);
+  background:var(--papel);
+  padding-block:.85rem;
 }
-.indice{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.9rem;border-bottom:1px solid var(--linea);scroll-behavior:smooth}
+.indice{display:flex;gap:.2rem;overflow-x:auto;scroll-behavior:smooth}
+/* Nombres sueltos, sin recuadro. Las pastillas con borde convertían una
+   guía de lectura en una segunda barra de herramientas: el peso que
+   sobraba. La marca activa se señala con un filete, no con un bloque. */
 .indice button{
-  flex-shrink:0;padding:.62rem 1.05rem;border:1px solid var(--linea);
-  font-size:var(--t-cejilla);letter-spacing:.16em;text-transform:uppercase;color:var(--gris);
-  white-space:nowrap;position:relative;
-  transition:color var(--t-corto) var(--ease),border-color var(--t-corto) var(--ease),background var(--t-corto) var(--ease);
+  flex-shrink:0;padding:.5rem .9rem;position:relative;
+  font-size:var(--t-cejilla);letter-spacing:.2em;text-transform:uppercase;color:var(--gris);
+  white-space:nowrap;
+  transition:color var(--t-corto) var(--ease);
 }
-.indice button:hover{color:var(--tinta);border-color:var(--moka)}
-.indice button[aria-current="true"]{color:var(--papel);background:var(--tinta);border-color:var(--tinta)}
+.indice button::after{
+  content:"";position:absolute;left:.9rem;right:.9rem;bottom:.15rem;height:1px;
+  background:var(--tinta);transform:scaleX(0);transform-origin:center;
+  transition:transform var(--t-medio) var(--ease);
+}
+.indice button:hover{color:var(--tinta)}
+.indice button[aria-current="true"]{color:var(--tinta)}
+.indice button[aria-current="true"]::after{transform:scaleX(1)}
 
 /* ==================== Fila de marca ==================== */
 .marca-fila{
@@ -451,7 +440,7 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 .tira{display:flex;gap:clamp(.9rem,2.4vw,1.4rem);overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;padding-bottom:.7rem;min-height:clamp(300px,62vw,400px)}
 .tira-mas{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;
-  aspect-ratio:3/4;color:var(--gris);transition:color .3s var(--ease);
+  aspect-ratio:4/5;color:var(--gris);transition:color .3s var(--ease);
 }
 .tira-mas:hover{color:var(--tinta)}
 .tira-mas b{font-family:'Bodoni Moda',serif;font-weight:400;font-size:2.1rem;color:var(--moka)}
@@ -482,10 +471,17 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 /* Sin tarjeta ni recuadro: la foto se apoya sobre el papel de la página.
    El marco 3/4 solo alinea las filas; no se ve. */
 .ficha{display:flex;flex-direction:column;position:relative}
+/* Las fotos llegan de cada proveedor con su propio fondo y su propio
+   encuadre: sobre el papel desnudo, unas parecían flotar y otras recortadas.
+   Un campo de nácar les da a todas la misma medida, y el producto se apoya
+   dentro con aire. Es lo que hace que una rejilla mezclada se vea de una
+   sola pieza. */
 .ficha-media{
-  position:relative;display:block;width:100%;aspect-ratio:3/4;overflow:hidden;
-  transition:transform var(--t-medio) var(--ease-suave);
+  position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;
+  background:var(--blanco);box-shadow:0 0 0 1px var(--linea);
+  transition:transform var(--t-medio) var(--ease-suave),box-shadow var(--t-medio) var(--ease);
 }
+@media (hover:hover){ .ficha:hover .ficha-media{box-shadow:0 0 0 1px var(--linea-media)} }
 /* Un halo apenas perceptible bajo la foto al acercarse: da cuerpo al
    producto sin dibujar la tarjeta que el diseño evita a propósito. */
 .ficha-media::after{
@@ -499,6 +495,7 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 }
 .ficha-media img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  padding:clamp(12px,3.4%,22px);
   transition:opacity var(--t-largo) var(--ease),transform 1.1s var(--ease-suave);
 }
 .ficha-media .alterna{opacity:0}
@@ -509,12 +506,15 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 }
 .ficha.agotada .ficha-media img{filter:grayscale(.34) opacity(.72)}
 
+/* Con el campo blanco el rótulo quedaba pegado al filete del borde.
+   Se le da el mismo aire interior que respira la foto. */
 .marca-stock{
-  position:absolute;top:2px;left:2px;z-index:6;pointer-events:none;
+  position:absolute;top:clamp(8px,2.4%,14px);left:clamp(8px,2.4%,14px);z-index:6;
+  pointer-events:none;
   font-size:9px;letter-spacing:.26em;text-transform:uppercase;
 }
 .marca-stock.cero{color:var(--moka)}
-.marca-stock.poco{color:var(--champan)}
+.marca-stock.poco{color:var(--champan-tinta)}
 
 /* La acción es una línea de texto bajo el precio: siempre visible,
    también en teléfono, y no tapa la foto. */
@@ -549,9 +549,10 @@ main,nav,footer,.riel,.cinta{position:relative;z-index:2}
 .ficha-encargo{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--moka);margin-top:.55rem}
 
 /* Rotación declarada desde el administrador, resuelta con CSS.
-   El marco es 4/5, así que a 90° se intercambian las medidas. */
+   El marco es 4/5: al girar 90° la imagen se dibuja a 5/4, de ahí
+   el 125% x 80%. */
 .ficha-media img.gira-90,.ficha-media img.gira-270,
-.linea-media img.gira-90,.linea-media img.gira-270{width:133.333%;height:75%;left:50%;top:50%}
+.linea-media img.gira-90,.linea-media img.gira-270{width:125%;height:80%;left:50%;top:50%}
 .ficha-media img.gira-90,.linea-media img.gira-90{transform:translate(-50%,-50%) rotate(90deg)}
 .ficha-media img.gira-270,.linea-media img.gira-270{transform:translate(-50%,-50%) rotate(-90deg)}
 .ficha-media img.gira-180,.linea-media img.gira-180{transform:rotate(180deg)}
@@ -605,7 +606,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
 .miniaturas{display:flex;gap:.6rem;overflow:auto}
 @media (min-width:760px){.miniaturas{flex-direction:column;max-height:640px;flex:0 0 68px}}
 .mini{
-  position:relative;flex:0 0 58px;width:58px;aspect-ratio:3/4;overflow:hidden;
+  position:relative;flex:0 0 58px;width:58px;aspect-ratio:4/5;overflow:hidden;background:var(--blanco);
   padding-bottom:7px;opacity:.4;transition:opacity .3s var(--ease);
 }
 @media (min-width:760px){.mini{flex:0 0 auto;width:64px}}
@@ -630,8 +631,8 @@ select.control{background:transparent;outline:none;cursor:pointer}
 .lienzo.zoom img{transform:scale(1.6)}
 .lienzo.cargando img{opacity:0}
 /* Con giro declarado sí hace falta un marco fijo para intercambiar medidas. */
-.lienzo.rotada{aspect-ratio:3/4;min-height:0}
-.lienzo.rotada img{position:absolute;top:50%;left:50%;max-height:none;width:133.333%;height:75%}
+.lienzo.rotada{aspect-ratio:4/5;min-height:0}
+.lienzo.rotada img{position:absolute;top:50%;left:50%;max-height:none;width:125%;height:80%}
 .lienzo.rotada img.gira-90{transform:translate(-50%,-50%) rotate(90deg)}
 .lienzo.rotada img.gira-270{transform:translate(-50%,-50%) rotate(-90deg)}
 .lienzo.rotada img.gira-180{width:100%;height:100%;transform:translate(-50%,-50%) rotate(180deg)}
@@ -645,7 +646,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
 .info-precio-fila{display:flex;align-items:flex-end;justify-content:space-between;gap:1.2rem}
 .info-precio{font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.6rem);line-height:1}
 .info-estado{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gris);text-align:right}
-.info-estado.poco{color:var(--champan)}
+.info-estado.poco{color:var(--champan-tinta)}
 .info-estado.cero{color:var(--moka)}
 
 .aviso-encargo{border-left:2px solid var(--moka);background:rgba(107,82,69,.05);padding:1rem 1.2rem;margin-top:1.6rem}
@@ -722,8 +723,8 @@ select.control{background:transparent;outline:none;cursor:pointer}
 [data-revelar]{opacity:0;transform:translateY(12px)}
 [data-revelar].visible{
   opacity:1;transform:none;
-  transition:opacity var(--t-largo) var(--ease-entra),transform var(--t-largo) var(--ease-entra);
-  transition-delay:calc(var(--paso,0) * 65ms);
+  transition:opacity .5s var(--ease-entra),transform .5s var(--ease-entra);
+  transition-delay:calc(var(--paso,0) * 38ms);
 }
 
 /* ==================== Cesta ==================== */
@@ -748,7 +749,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
 
 .linea-cesta{display:flex;gap:1.1rem;padding-bottom:1.4rem;margin-bottom:1.4rem;border-bottom:1px solid var(--linea)}
 .linea-cesta:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
-.linea-media{position:relative;flex:0 0 70px;width:70px;aspect-ratio:3/4;overflow:hidden}
+.linea-media{position:relative;flex:0 0 70px;width:70px;aspect-ratio:4/5;overflow:hidden;background:var(--blanco);box-shadow:0 0 0 1px var(--linea)}
 .linea-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .linea-media.encargo img{opacity:.6}
 .linea-datos{flex:1;min-width:0}
@@ -843,11 +844,11 @@ select.control{background:transparent;outline:none;cursor:pointer}
    y otra aparecía. Con View Transitions el navegador funde ambos fotogramas.
    Donde no existe la API no pasa nada: el corte de siempre. */
 @media (prefers-reduced-motion:no-preference){
-  ::view-transition-old(root){animation:vt-sale .3s var(--ease) both}
-  ::view-transition-new(root){animation:vt-entra .42s var(--ease-entra) both}
+  ::view-transition-old(root){animation:vt-sale .14s var(--ease) both}
+  ::view-transition-new(root){animation:vt-entra .26s var(--ease-entra) both}
 }
-@keyframes vt-sale{to{opacity:0;transform:translateY(-6px)}}
-@keyframes vt-entra{from{opacity:0;transform:translateY(10px)}}
+@keyframes vt-sale{to{opacity:0}}
+@keyframes vt-entra{from{opacity:0;transform:translateY(6px)}}
 
 @media (prefers-reduced-motion:reduce){
   /* Barrer todo con .001ms también rompe lo que no es decorativo: la cinta
@@ -857,7 +858,7 @@ select.control{background:transparent;outline:none;cursor:pointer}
     animation-duration:.01ms !important;animation-iteration-count:1 !important;
     transition-duration:.01ms !important;scroll-behavior:auto !important;
   }
-  .marquesina,.hero-bajar i::after,.esqueleto::after{animation:none !important}
+  .hero-bajar i::after,.esqueleto::after{animation:none !important}
   .hero-lamina.activa img.kenburns{animation:none !important;transform:none !important}
   [data-revelar],.telon-linea>*{opacity:1 !important;transform:none !important}
   .tira{scroll-behavior:auto}
@@ -865,15 +866,6 @@ select.control{background:transparent;outline:none;cursor:pointer}
 </style>
 </head>
 <body>
-
-<aside class="riel" aria-hidden="true">
-  <div class="riel-progreso" id="riel-progreso"></div>
-  <span>Zona Glam Supply — Tovar, Mérida</span>
-</aside>
-
-<div class="cinta">
-  <div class="marquesina" id="marquesina"></div>
-</div>
 
 <nav class="nav" id="nav">
   <div class="nav-fila">
@@ -898,6 +890,8 @@ select.control{background:transparent;outline:none;cursor:pointer}
       </button>
     </div>
   </div>
+
+  <div class="nav-progreso" id="nav-progreso"></div>
 
   <div class="buscador-movil" id="buscador-movil">
     <div class="envoltura">
@@ -924,8 +918,6 @@ select.control{background:transparent;outline:none;cursor:pointer}
   <section id="vista-inicio" class="oculto">
 
     <div class="hero oculto" id="hero">
-      <div class="hero-pista" id="hero-pista"></div>
-      <div class="hero-velo"></div>
 
       <div class="hero-texto">
         <span class="telon-linea l-1"><span class="cejilla">Acrílicos · Geles · Decoración · Mayor y detal</span></span>
@@ -933,24 +925,23 @@ select.control{background:transparent;outline:none;cursor:pointer}
         <span class="telon-linea l-3"><span class="filete" style="display:block"></span></span>
       </div>
 
-      <button class="hero-flecha izq" data-accion="hero" data-dir="-1" aria-label="Anterior">
-        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7"/></svg>
-      </button>
-      <button class="hero-flecha der" data-accion="hero" data-dir="1" aria-label="Siguiente">
-        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-
-      <div class="hero-pie">
-        <div class="hero-producto" id="hero-producto"></div>
-        <div class="hero-contador" id="hero-contador"></div>
+      <div class="hero-vitrina">
+        <div class="hero-pista" id="hero-pista"></div>
       </div>
 
-      <a class="hero-bajar" href="#surtido" aria-label="Ir al surtido">
-        <span>Ver el surtido</span>
-        <i></i>
-      </a>
-
-      <div class="hero-indicadores" id="hero-indicadores"></div>
+      <div class="hero-pie" id="hero-pie">
+        <div class="hero-producto" id="hero-producto"></div>
+        <div class="hero-mandos">
+          <div class="hero-contador" id="hero-contador"></div>
+          <button class="hero-flecha" data-accion="hero" data-dir="-1" aria-label="Destacado anterior">
+            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="hero-indicadores" id="hero-indicadores"></div>
+          <button class="hero-flecha" data-accion="hero" data-dir="1" aria-label="Destacado siguiente">
+            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="beneficios">
@@ -1206,13 +1197,6 @@ const CAMPOS_FOTO  = ['foto','foto_secundaria','foto_3','foto_4','foto_5','foto_
 const CAMPOS_VIDEO = ['video','video_2','video_3','video_4'];
 const PLACEHOLDER  = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23EAE4E7'/%3E%3Ctext x='200' y='252' text-anchor='middle' font-family='Didot,Georgia,serif' font-size='16' fill='%23A9A2AC' letter-spacing='5'%3EZONA GLAM%3C/text%3E%3C/svg%3E";
 
-const CINTA = [
-  'Envíos a toda Venezuela por MRW y ZOOM',
-  'Retiro en tienda en Tovar',
-  'Pago móvil, divisas y Binance',
-  'Todo para uñas: acrílicos, geles y decoración'
-];
-
 let productos = [], porId = new Map(), marcas = [];
 let cesta = [];
 let vista = 'inicio', marcaActual = '', textoBusqueda = '';
@@ -1274,7 +1258,7 @@ const observadorRevelar = new IntersectionObserver(entradas => {
   if (ahora - tandaSello > 120){ tandaSello = ahora; tandaPaso = 0; }
   entradas.forEach(e => {
     if (!e.isIntersecting) return;
-    e.target.style.setProperty('--paso', Math.min(tandaPaso++, 7));
+    e.target.style.setProperty('--paso', Math.min(tandaPaso++, 5));
     e.target.classList.add('visible');
     observadorRevelar.unobserve(e.target);
   });
@@ -1340,7 +1324,6 @@ function llenarTira(el){
    =================================================================== */
 async function iniciar(){
   $('#anio').textContent = new Date().getFullYear();
-  $('#marquesina').innerHTML = [...CINTA, ...CINTA].map(t => '<span>'+esc(t)+'</span>').join('');
   leerCesta();
 
   let pintado = false;
@@ -1406,9 +1389,12 @@ function aplicar(data, soloRefrescar){
 function montarHero(config){
   laminas = [];
 
+  // Las láminas que carga el administrador son piezas editoriales pensadas
+  // para llenar el cuadro; las fotos de producto, no. Se marcan aparte para
+  // que cada una reciba el encaje que le corresponde.
   if (config){
-    ['foto_1','foto_2','foto_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'img', url:config[k].trim() }); });
-    ['video_1','video_2','video_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'video', url:config[k].trim() }); });
+    ['foto_1','foto_2','foto_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'img', url:config[k].trim(), panoramica:true }); });
+    ['video_1','video_2','video_3'].forEach(k => { if (valido(config[k])) laminas.push({ tipo:'video', url:config[k].trim(), panoramica:true }); });
   }
 
   // Un video por marca. Cada uno lleva la foto del producto como respaldo.
@@ -1438,7 +1424,7 @@ function montarHero(config){
     const prioridad = i ? 'loading="lazy"' : 'fetchpriority="high"';
     const poster = valido(l.poster) ? esc(l.poster) : '';
     const respaldo = poster ? '<img class="hero-poster kenburns" src="' + poster + '" alt="" ' + prioridad + ' decoding="async">' : '';
-    return '<div class="hero-lamina' + (i ? '' : ' activa') + '" data-lamina="' + i + '">' +
+    return '<div class="hero-lamina' + (i ? '' : ' activa') + (l.panoramica ? ' panoramica' : '') + '" data-lamina="' + i + '">' +
       (l.tipo === 'img'
         ? '<img class="hero-poster kenburns" src="' + esc(l.url) + '" alt="" ' + prioridad + ' decoding="async">'
         : respaldo + '<video src="' + esc(l.url) + '"' + (poster ? ' poster="' + poster + '"' : '') +
@@ -1451,11 +1437,13 @@ function montarHero(config){
 
   $('#hero-indicadores').innerHTML = laminas.map((_,i) =>
     '<button data-accion="hero-ir" data-i="' + i + '" aria-label="Ir al destacado ' + (i+1) + '"><i data-relleno="' + i + '"></i></button>'
-  ).join('') +
-  '<button class="hero-pausa" data-accion="hero-pausa" aria-pressed="false" aria-label="Pausar el pase de imágenes">' +
-    '<svg class="icono-pausa" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9"/><rect x="7" y="1.5" width="3" height="9"/></svg>' +
-    '<svg class="icono-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5l7 4.5-7 4.5z"/></svg>' +
-  '</button>';
+  ).join('');
+
+  $('.hero-mandos').insertAdjacentHTML('beforeend',
+    '<button class="hero-pausa" data-accion="hero-pausa" aria-pressed="false" aria-label="Pausar el pase de imágenes">' +
+      '<svg class="icono-pausa" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9"/><rect x="7" y="1.5" width="3" height="9"/></svg>' +
+      '<svg class="icono-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5l7 4.5-7 4.5z"/></svg>' +
+    '</button>');
 
   $('#hero').classList.remove('oculto');
   pintarLamina(0);
@@ -1483,11 +1471,15 @@ function pintarLamina(i){
   $('#hero-producto').innerHTML = (l && l.nombre)
     ? '<span class="cejilla">' + esc(l.marca) + '</span>' +
       '<h3>' + esc(l.nombre) + '</h3>' +
-      '<button class="btn btn-claro" data-accion="ver" data-id="' + esc(l.id) + '">Ver producto</button>'
+      '<button class="btn" data-accion="ver" data-id="' + esc(l.id) + '">Ver producto</button>'
     : '';
 
   const bloque = $('#hero-producto');
   bloque.style.animation = 'none'; void bloque.offsetWidth; bloque.style.animation = '';
+
+  // Sin producto asociado (lámina editorial) el pie queda vacío: se evita
+  // que el borde superior del pie flote sin nada debajo.
+  $('#hero-pie').classList.toggle('sin-ficha', !(l && l.nombre));
 
   $('#hero-contador').innerHTML = '<b>' + dosDig(laminaActual+1) + '</b> — ' + dosDig(laminas.length);
 
@@ -2338,8 +2330,8 @@ window.addEventListener('scroll', () => {
     $('#nav').classList.toggle('compacta', y > 24);
     $('#arriba').classList.toggle('visible', y > 640);
     const alto = document.documentElement.scrollHeight - window.innerHeight;
-    const barra = $('#riel-progreso');
-    if (barra) barra.style.height = (alto > 0 ? (y/alto)*100 : 0) + '%';
+    const barra = $('#nav-progreso');
+    if (barra) barra.style.width = (alto > 0 ? (y/alto)*100 : 0) + '%';
     tickScroll = false;
   });
 }, { passive:true });
